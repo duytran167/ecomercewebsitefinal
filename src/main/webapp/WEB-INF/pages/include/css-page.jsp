@@ -10,3 +10,5 @@ CSS
 <link rel="stylesheet" href="<c:url value="/resources/css/ion.rangeSlider.skinFlat.css"/>" />
 <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css"/>"/>
 <link rel="stylesheet" href="<c:url value="/resources/css/main.css"/>"/>
+<link rel="stylesheet" href="<c:url value="/resources/css/sb-admin-2.css"/>"/>
+<link rel="stylesheet" href="<c:url value="/resources/css/sb-admin-2.min.css"/>"/>

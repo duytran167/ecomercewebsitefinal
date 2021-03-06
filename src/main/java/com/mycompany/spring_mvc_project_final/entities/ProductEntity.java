@@ -137,17 +137,19 @@ public class ProductEntity implements Serializable {
         this.promotion = promotion;
     }
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "product_detail_id")
     private ProductDetailEntity product_detail;
 
-    public ProductDetailEntity getProduct_detaill() {
+    public ProductDetailEntity getProduct_detail() {
         return product_detail;
     }
 
-    public void setProduct_detaill(ProductDetailEntity product_detail) {
+    public void setProduct_detail(ProductDetailEntity product_detail) {
         this.product_detail = product_detail;
     }
+    
+    
 
     
 

@@ -5,16 +5,23 @@
  */
 package com.mycompany.spring_mvc_project_final.controller;
 
+import com.mycompany.spring_mvc_project_final.service.AdminService;
+import com.mycompany.spring_mvc_project_final.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
+    @Autowired
+    private AdminService adminService;
+    
     @RequestMapping("/home")
     public String viewHome(Model model) {
 
@@ -26,5 +33,11 @@ public class AdminController {
 
         model.addAttribute("message", "Hello Admin: " + username);
         return "admin/home";
+    }
+    
+     @RequestMapping(value = {"/admin"}, method = RequestMethod.GET)
+    public String categoryList(Model model) {
+        
+        return "admin";
     }
 }

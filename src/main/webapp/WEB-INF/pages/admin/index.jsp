@@ -1,10 +1,9 @@
 <%-- 
-    Document   : home
-    Created on : Jun 20, 2019, 7:47:58 PM
-    Author     : AnhLe
+    Document   : index.jsp
+    Created on : Mar 6, 2021, 11:36:18 PM
+    Author     : PC
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,7 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>${message}</h1>
-        <jsp:include page="../include/menu.jsp" />
+        <h1>Hello World!</h1>
     </body>
 </html>

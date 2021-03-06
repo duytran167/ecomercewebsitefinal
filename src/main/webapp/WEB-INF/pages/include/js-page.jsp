@@ -9,3 +9,9 @@
 <script src="<c:url value="/resources/js/jquery.magnific-popup.min.js"/>"></script>
 <script src="<c:url value="/resources/js/owl.carousel.min.js"/>"></script>			
 <script src="<c:url value="/resources/js/main.js"/>"></script>
+<script src="<c:url value="/resources/js/datatables-demo_1.js"/>"></script>
+<script src="<c:url value="/resources/js/datatables-demo.js"/>"></script>
+<script src="<c:url value="/resources/js/chart-pie-demo.js"/>"></script>
+<script src="<c:url value="/resources/js/chart-bar-demo-demo_1.js"/>"></script>
+<script src="<c:url value="/resources/js/chart-area-demo.js"/>"></script>
+

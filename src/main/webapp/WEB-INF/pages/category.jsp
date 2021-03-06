@@ -9,12 +9,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
-<html>
+<html lang="zxx" class="no-js">
     <head>
         <!-- Mobile Specific Meta -->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Favicon-->
-        <link rel="shortcut icon" href="<c:url value="/resources/images/img.png"/>">
+        <link rel="shortcut icon" href="img/fav.png">
         <!-- Author Meta -->
         <meta name="author" content="CodePixar">
         <!-- Meta Description -->
@@ -49,8 +49,7 @@
         <div class="container">
 
             <div class="row">
-                <c:if test="${products != null && fn:length(products)>0}">
-                    <c:forEach var="p" items="${products}">
+                
                         <div class="col-xl-9 col-lg-8 col-md-7">
                             <!-- Start Filter Bar -->
                             <div class="filter-bar d-flex flex-wrap align-items-center">
@@ -101,17 +100,13 @@
                                                 </div>
                                                 <div class="price">
                                                     <h5>${p.name}</h5>
-                                                    <h3>$150.00</h3>
+                                                    
+                                                    <h3>${p.product_detail.price}</h3>
                                                 </div>
                                             </div>
                                         </c:forEach>
                                     </c:if> 
-                                    <c:if test="${products == null || fn:length(products)<=0}">
-                                        <tr>
-                                            <td style="color: red" colspan="9">Not Found!!!</td>
-                                
-                                        </tr>
-                                    </c:if>                                    
+    																																								
                                 </div>
                             </section>
                             <!-- End Best Seller -->

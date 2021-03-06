@@ -90,16 +90,19 @@ public class ProductDetailEntity {
         this.price = price;
     }
     
-   @OneToOne(mappedBy = "product_detail")
-    private ProductEntity product;
+   @OneToMany(mappedBy = "product_detail", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<ProductEntity> product;
 
-    public ProductEntity getProduct() {
+    public Set<ProductEntity> getProduct() {
         return product;
     }
 
-    public void setProduct(ProductEntity product) {
+    public void setProduct(Set<ProductEntity> product) {
         this.product = product;
     }
+   
+   
 
     
     
