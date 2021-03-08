@@ -1,17 +1,16 @@
-// Background Gradient Utilities
-
-@each $color, $value in $theme-colors {
-  .bg-gradient-#{$color} {
-    background-color: $value;
-    background-image: linear-gradient(180deg, $value 10%, darken($value, 15%) 100%);
-    background-size: cover;
-  }
+/* Background Colors*/
+.bg-gradient-dark:after {
+  position: absolute;
+  content: '';
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.7) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.7) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0.7) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
-// Grayscale Background Utilities
-
-@each $level, $value in $grays {
-  .bg-gray-#{$level} {
-    background-color: $value !important;
-  }
+.bg-light-gray {
+  background-color: $gray-100;
 }

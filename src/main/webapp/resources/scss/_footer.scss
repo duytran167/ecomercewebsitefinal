@@ -1,14 +1,25 @@
-footer.sticky-footer {
-  padding: 2rem 0;
-  flex-shrink: 0;
-  .copyright {
-    line-height: 1;
-    font-size: 0.8rem;
-  }
+/*===== FOOTER =====*/
+.main-footer {
+  background: $white;
+  padding: 0.9375rem;
+  color: #444444;
+  border-top: 1px solid $border-color;
 }
 
-body.sidebar-toggled {
-  footer.sticky-footer {
-    width: 100%;
+.copyright {
+  padding-left: 1.25rem;
+  padding-top: 1.9rem;
+  padding-bottom: 1.9rem;
+  @include media-breakpoint-up(lg) {
+    padding-left: 2.69rem;
+  }
+  @include media-breakpoint-up(xl) {
+    padding-left: 3.44rem;
+  }
+  @include media-breakpoint-up(xxl) {
+    padding-left: 6.25rem;
+  }
+  p {
+    font-weight: 500;
   }
 }

@@ -8,6 +8,7 @@ package com.mycompany.spring_mvc_project_final.service;
 import com.mycompany.spring_mvc_project_final.entities.ProductEntity;
 import com.mycompany.spring_mvc_project_final.repository.ProductRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +28,14 @@ public class ProductService {
     
     public void save(ProductEntity productEntity){
        productRepository.save(productEntity);
+    }
+    
+    public ProductEntity findProductById(int id) {
+        Optional<ProductEntity> optional = productRepository.findById(id);
+        if (optional.isPresent()) {
+            return optional.get();
+        } else {
+            return new ProductEntity();
+        }
     }
 }
