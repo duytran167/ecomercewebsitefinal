@@ -22,6 +22,7 @@ public class UserController {
         if (principal instanceof UserDetails) {
             username = ((UserDetails) principal).getUsername();
         }
+        
 
         model.addAttribute("message", "Hello User: " + username);
         return "user/home2";

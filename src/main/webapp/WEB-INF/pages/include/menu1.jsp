@@ -6,7 +6,8 @@
             <div class="d-flex justify-content-between align-items-center">
                 <ul class="list">
                     <li><a href="tel:+12312-3-1209">+12312-3-1209</a></li>
-                    <li><a href="mailto:support@colorlib.com">support@colorlib.com</a></li>								
+                    <li><a href="mailto:support@colorlib.com">support@colorlib.com</a></li>
+                    <li><a>Message : <span>${message}</span></a></li>
                 </ul>
                 <ul class="list">
                     <li><a href="<c:url value="/admin/home"/>">login</a></li>
@@ -16,7 +17,7 @@
     </div>
     <nav class="navbar navbar-expand-lg  navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="<c:url value="/home"/>">
                 <img src="<c:url value="/resources/img/logo.png"/>" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,9 +27,9 @@
                 <ul class="navbar-nav">
                     <li><a href="<c:url value="/home"/>">Home</a></li>
                     <li><a href="<c:url value="/product/category"/>">Category</a></li>
-                    <li><a href="#men">Men</a></li>
-                    <li><a href="#women">Women</a></li>
-                    <li><a href="#latest">latest</a></li>
+                    <li><a href="#men">New</a></li>
+                    
+                    <li><a href="#latest">About Us</a></li>
                     <!-- Dropdown -->
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -38,7 +39,7 @@
                             <a class="dropdown-item" href="category.html">Category</a>
                             <a class="dropdown-item" href="single.html">Single</a>
                             <a class="dropdown-item" href="cart.html">Cart</a>
-                            <a class="dropdown-item" href="checkout.html">Checkout</a>
+                            <a class="dropdown-item" href="<c:url value="/checkout/checkout"/>">Checkout</a>
                             <a class="dropdown-item" href="confermation.html">Confermation</a>
                             <a class="dropdown-item" href="login.html">Login</a>
                             <a class="dropdown-item" href="tracking.html">Tracking</a>

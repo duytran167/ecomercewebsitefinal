@@ -56,4 +56,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout().logoutUrl("/logout")
                 .logoutSuccessUrl("/home").deleteCookies("JSESSIONID");
     }
+    
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("user1@gmail.com")
+                .password(passwordEncoder().encode("123456"))
+                .roles("USER")
+                .and()
+                .withUser("admin1@gmail.com")
+                .password(passwordEncoder().encode("123456"))
+                .roles("ADMIN");
+    }
 }

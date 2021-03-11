@@ -8,6 +8,7 @@ package com.mycompany.spring_mvc_project_final.entities;
 import com.mycompany.spring_mvc_project_final.enums.ProductStatus;
 import com.mycompany.spring_mvc_project_final.enums.UserStatus;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,6 +24,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -49,6 +52,9 @@ public class ProductEntity implements Serializable {
     @Column(length = 100)
     private String description;
     
+    @Temporal(TemporalType.DATE)
+    @Column(name = "created_date")
+    private Date createdDate;
    
 
     public ProductEntity() {

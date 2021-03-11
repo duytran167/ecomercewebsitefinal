@@ -10,15 +10,10 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,15 +23,8 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author PC
  */
 @MappedSuperclass
-@Table(name = "personal", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Personal {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
-    private Integer id;
 
-    
     @Column(name = "full_name", length = 100)
     @NotBlank(message="This field is min 3 and max 100")
     @Size(min = 3, max = 100)
@@ -60,14 +48,6 @@ public class Personal {
      private String address;
 
     public Personal() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getFullName() {

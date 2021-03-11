@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -31,7 +32,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @Table( name = "orders")
-public class OrderEntity{
+public class OrderEntity extends Personal{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +49,11 @@ public class OrderEntity{
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+    
+    private String description;
+    
+    @Transient
+     private String address; 
     
     public OrderEntity() {
     }
@@ -86,29 +92,35 @@ public class OrderEntity{
         this.status = status;
     }
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private Set<PaymentEntity> payment;
-
-    public Set<PaymentEntity> getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Set<PaymentEntity> payment) {
-        this.payment = payment;
-    }
     
-     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private Set<OrderDetailEntity> order_detail;
+    @ManyToOne
+    @JoinColumn(name = "order_detail_id")
+    private OrderDetailEntity order_detail;
 
-    public Set<OrderDetailEntity> getOrder_detail() {
+    public OrderDetailEntity getOrder_detail() {
         return order_detail;
     }
 
-    public void setOrder_detail(Set<OrderDetailEntity> order_detail) {
+    public void setOrder_detail(OrderDetailEntity order_detail) {
         this.order_detail = order_detail;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    
+    
+    
+     
+
+    
+
+    
      
     
     @ManyToOne

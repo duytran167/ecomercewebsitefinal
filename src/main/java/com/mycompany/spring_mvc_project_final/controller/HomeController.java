@@ -5,6 +5,7 @@
  */
 package com.mycompany.spring_mvc_project_final.controller;
 
+
 import com.mycompany.spring_mvc_project_final.service.ProductService;
 import com.mycompany.spring_mvc_project_final.utils.SecurityUtils;
 import java.util.List;
@@ -48,4 +49,6 @@ public class HomeController {
     public String accessDenied(Model model) {
         return "403Page";
     }
+    
+    
 }

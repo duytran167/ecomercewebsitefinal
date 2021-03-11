@@ -27,7 +27,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-public class UserEntity implements Serializable {
+public class UserEntity extends Personal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

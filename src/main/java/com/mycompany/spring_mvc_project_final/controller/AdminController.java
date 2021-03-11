@@ -35,9 +35,5 @@ public class AdminController {
         return "admin/home";
     }
     
-     @RequestMapping(value = {"/admin"}, method = RequestMethod.GET)
-    public String categoryList(Model model) {
-        
-        return "admin";
-    }
+     
 }

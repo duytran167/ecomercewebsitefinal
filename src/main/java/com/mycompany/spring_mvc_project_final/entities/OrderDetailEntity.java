@@ -94,17 +94,25 @@ public class OrderDetailEntity {
         this.quantity = quantity;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private OrderEntity order;
+    
 
-    public OrderEntity getOrder() {
-        return order;
+    @OneToMany(mappedBy = "order_detail", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<OrderEntity> order_detail;
+
+    public Set<OrderEntity> getOrder_detail() {
+        return order_detail;
     }
 
-    public void setOrder(OrderEntity order) {
-        this.order = order;
+    public void setOrder_detail(Set<OrderEntity> order_detail) {
+        this.order_detail = order_detail;
     }
+
+
+
+    
+    
+    
     
     @ManyToOne
     @JoinColumn(name = "pro_id")

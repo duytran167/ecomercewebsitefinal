@@ -31,6 +31,7 @@
         <!-- Start Header Area -->
         <jsp:include page="include/menu1.jsp" />
         <!-- End Header Area -->
+        
         <!-- Start Banner Area -->
         <section class="banner-area organic-breadcrumb">
             <div class="container">
@@ -39,7 +40,7 @@
                         <h1>Shop Category page</h1>
                         <nav class="d-flex align-items-center justify-content-start">
                             <a href="index.html">Home<i class="fa fa-caret-right" aria-hidden="true"></i></a>
-                            <a href="category.html">Fashon Category</a>
+                            <a href="category.html">Fashion Category</a>
                         </nav>
                     </div>
                 </div>
@@ -88,7 +89,8 @@
                                     <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 single-product">
                                         <div class="content">
                                             <div class="content-overlay"></div>
-                                            <img class="content-image img-fluid d-block mx-auto" src="${pageContext.request.contextPath }/img/l5.jpg" alt="">
+                                            
+                                            <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l8.jpg"/>" alt="">
                                             <div class="content-details fadeIn-bottom">
                                                 <div class="bottom d-flex align-items-center justify-content-center">
                                                     <a href="#"><span class="lnr lnr-heart"></span></a>
@@ -102,7 +104,9 @@
                                         <div class="price">
                                             <h5>${p.name}</h5>
 
-                                            <h3>${p.product_detail.price}</h3>
+                                            <h3><fmt:formatNumber type="currency"
+                                                          value="${p.product_detail.price}"
+                                                          currencySymbol="VND"/></h3>
                                         </div>
                                         <td>
                                             <button onclick="location.href = '<c:url value="/product/detail/${p.id}"/>'"

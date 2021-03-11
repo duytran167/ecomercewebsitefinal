@@ -6,7 +6,9 @@
 package com.mycompany.spring_mvc_project_final.controller;
 
 import com.mycompany.spring_mvc_project_final.service.CategoryService;
+import com.mycompany.spring_mvc_project_final.service.ColorService;
 import com.mycompany.spring_mvc_project_final.service.ProductService;
+import com.mycompany.spring_mvc_project_final.service.SizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,12 @@ public class ProductController {
     @Autowired
     private CategoryService categoryService;
     
+    @Autowired
+    private SizeService sizeService;
+    
+    @Autowired
+    private ColorService colorService;
+    
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {
         StringTrimmerEditor stringTrimerEditor = new StringTrimmerEditor(true);
@@ -49,6 +57,8 @@ public class ProductController {
         model.addAttribute("products", productService.findProductById(id));
         model.addAttribute("categories",
                 categoryService.getCategories());
+        model.addAttribute("size", sizeService.getSize());
+        model.addAttribute("color", colorService.getColor());
         
         return "detail";
     }

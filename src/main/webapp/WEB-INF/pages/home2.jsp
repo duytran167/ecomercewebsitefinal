@@ -1,9 +1,3 @@
-<%-- 
-    Document   : home2
-    Created on : Feb 4, 2021, 8:04:47 PM
-    Author     : ASUS
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,6 +20,7 @@
     </head>
     <body>
         <!-- Start Header Area -->
+
         <jsp:include page="include/menu1.jsp" />
         <!-- End Header Area -->
 
@@ -55,84 +50,37 @@
                 <div class="row d-flex justify-content-center">
                     <div class="menu-content pb-40">
                         <div class="title text-center">
-                            <h1 class="text-white mb-10">New realeased Products for Men</h1>
-                            <p class="text-white">Who are in extremely love with eco friendly system.</p>
+                            <h1 class="text-white mb-10">NEW ARRIVAL</h1>
+                            <p class="text-white">FROM STUDIO WITH LOVE.</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 single-product">
-                        <div class="content">
-                            <div class="content-overlay"></div>
-                            <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l1.jpg"/>" alt="">
-                            <div class="content-details fadeIn-bottom">
-                                <div class="bottom d-flex align-items-center justify-content-center">
-                                    <a href="#"><span class="lnr lnr-heart"></span></a>
-                                    <a href="#"><span class="lnr lnr-layers"></span></a>
-                                    <a href="#"><span class="lnr lnr-cart"></span></a>
-                                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                    
+                        <c:forEach var="n" items="${new_products}">
+                            <div class="col-lg-3 col-md-6 single-product">
+                                <div class="content">
+                                    <div class="content-overlay"></div>
+                                    <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l1.jpg"/>" alt="">
+                                    <div class="content-details fadeIn-bottom">
+                                        <div class="bottom d-flex align-items-center justify-content-center">
+                                            <a href="#"><span class="lnr lnr-heart"></span></a>
+                                            <a href="#"><span class="lnr lnr-layers"></span></a>
+                                            <a href="#"><span class="lnr lnr-cart"></span></a>
+                                            <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="price">
+                                    <h5 class="text-white">${n.name}</h5>
+                                    <h3 class="text-white">$150.00</h3>
                                 </div>
                             </div>
-                        </div>
-                        <div class="price">
-                            <h5 class="text-white">${p.name}</h5>
-                            <h3 class="text-white">$150.00</h3>
-                        </div>
-                    </div>	
-                    <div class="col-lg-3 col-md-6 single-product">
-                        <div class="content">
-                            <div class="content-overlay"></div>
-                            <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l2.jpg"/>" alt="">
-                            <div class="content-details fadeIn-bottom">
-                                <div class="bottom d-flex align-items-center justify-content-center">
-                                    <a href="#"><span class="lnr lnr-heart"></span></a>
-                                    <a href="#"><span class="lnr lnr-layers"></span></a>
-                                    <a href="#"><span class="lnr lnr-cart"></span></a>
-                                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-                                </div>
-                            </div>					      
-                        </div>
-                        <div class="price">
-                            <h5 class="text-white">Long Sleeve shirt</h5>
-                            <h3 class="text-white">$150.00</h3>
-                        </div>							  
-                    </div>	
-                    <div class="col-lg-3 col-md-6 single-product">
-                        <div class="content">
-                            <div class="content-overlay"></div>
-                            <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l3.jpg"/>" alt="">
-                            <div class="content-details fadeIn-bottom">
-                                <div class="bottom d-flex align-items-center justify-content-center">
-                                    <a href="#"><span class="lnr lnr-heart"></span></a>
-                                    <a href="#"><span class="lnr lnr-layers"></span></a>
-                                    <a href="#"><span class="lnr lnr-cart"></span></a>
-                                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-                                </div>
-                            </div>					      
-                        </div>
-                        <div class="price">
-                            <h5 class="text-white">Long Sleeve shirt</h5>
-                            <h3 class="text-white">$150.00</h3>
-                        </div>							  
-                    </div>	
-                    <div class="col-lg-3 col-md-6 single-product">
-                        <div class="content">
-                            <div class="content-overlay"></div>
-                            <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l4.jpg"/>" alt="">
-                            <div class="content-details fadeIn-bottom">
-                                <div class="bottom d-flex align-items-center justify-content-center">
-                                    <a href="#"><span class="lnr lnr-heart"></span></a>
-                                    <a href="#"><span class="lnr lnr-layers"></span></a>
-                                    <a href="#"><span class="lnr lnr-cart"></span></a>
-                                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="price">
-                            <h5 class="text-white">Long Sleeve shirt</h5>
-                            <h3 class="text-white">$150.00</h3>
-                        </div>							  					  
-                    </div>																		
+                        </c:forEach>
+                        
+
+
+
                 </div>
             </div>
         </section>
