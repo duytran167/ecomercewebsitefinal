@@ -30,9 +30,9 @@ public class OrderDetailEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    private int productId;
     
-    private int orderId;
+    
+    
     
      @Column(name = "price")
     private double price;
@@ -54,21 +54,9 @@ public class OrderDetailEntity {
         this.id = id;
     }
 
-    public int getProductId() {
-        return productId;
-    }
+   
 
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public int getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
+    
 
     public double getPrice() {
         return price;
@@ -115,7 +103,7 @@ public class OrderDetailEntity {
     
     
     @ManyToOne
-    @JoinColumn(name = "pro_id")
+    @JoinColumn(name = "productId")
     private ProductEntity product;
 
     public ProductEntity getProduct() {

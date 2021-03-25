@@ -24,27 +24,23 @@ import javax.persistence.Table;
  * @author PC
  */
 @Entity
-@Table( name = "Product_Detail")
+@Table(name = "Product_Detail")
 public class ProductDetailEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     @ManyToOne
     @JoinColumn(name = "size_id")
     private SizeEntity size;
-    
+
     @ManyToOne
     @JoinColumn(name = "color_id")
     private ColorEntity color;
-    
-    
+
     private int quantity;
-    
-    @Column(name = "Price")
-    private double price;
-    
+
     
 
     public ProductDetailEntity() {
@@ -82,29 +78,20 @@ public class ProductDetailEntity {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
     
-   @OneToMany(mappedBy = "product_detail", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private Set<ProductEntity> product;
 
-    public Set<ProductEntity> getProduct() {
+    
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private ProductEntity product;
+
+    public ProductEntity getProduct() {
         return product;
     }
 
-    public void setProduct(Set<ProductEntity> product) {
+    public void setProduct(ProductEntity product) {
         this.product = product;
     }
-   
-   
 
-    
-    
-    
 }

@@ -5,14 +5,22 @@
  */
 package com.mycompany.spring_mvc_project_final.controller;
 
+import com.mycompany.spring_mvc_project_final.entities.ProductEntity;
 import com.mycompany.spring_mvc_project_final.service.CategoryService;
 import com.mycompany.spring_mvc_project_final.service.ColorService;
+import com.mycompany.spring_mvc_project_final.service.ProductDetailService;
+import com.mycompany.spring_mvc_project_final.service.ProductService;
 import com.mycompany.spring_mvc_project_final.service.ProductService;
 import com.mycompany.spring_mvc_project_final.service.SizeService;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +37,8 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-
+    
+    
     @Autowired
     private CategoryService categoryService;
     
@@ -38,6 +47,8 @@ public class ProductController {
     
     @Autowired
     private ColorService colorService;
+    @Autowired
+    private ProductDetailService productDetailService;
     
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {
@@ -57,9 +68,13 @@ public class ProductController {
         model.addAttribute("products", productService.findProductById(id));
         model.addAttribute("categories",
                 categoryService.getCategories());
+       
         model.addAttribute("size", sizeService.getSize());
         model.addAttribute("color", colorService.getColor());
         
         return "detail";
     }
+
 }
+    
+

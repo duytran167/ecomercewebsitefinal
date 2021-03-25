@@ -3,7 +3,7 @@
     Created on : Feb 25, 2021, 10:00:09 AM
     Author     : PC
 --%>
-
+<%@ taglib prefix="tag" uri="/WEB-INF/taglibs/customTaglib.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -37,7 +37,7 @@
             <div class="container">
                 <div class="breadcrumb-banner d-flex flex-wrap align-items-center">
                     <div class="col-first">
-                        <h1>Shop Category page</h1>
+                        <h1>All Products</h1>
                         <nav class="d-flex align-items-center justify-content-start">
                             <a href="index.html">Home<i class="fa fa-caret-right" aria-hidden="true"></i></a>
                             <a href="category.html">Fashion Category</a>
@@ -58,9 +58,11 @@
                         <a href="#" class="list-btn"><i class="fa fa-th-list" aria-hidden="true"></i></a>
                         <div class="sorting">
                             <select>
-                                <option value="1">Default sorting</option>
-                                <option value="1">Default sorting</option>
-                                <option value="1">Default sorting</option>
+                                <option value="1">All Product</option>
+                                <option value="1">Shirt</option>
+                                <option value="1">T-Shirt</option>
+                                <option value="1">Pants</option>
+                                <option value="1">Accessories</option>
                             </select>
                         </div>
                         <div class="sorting mr-auto">
@@ -96,7 +98,7 @@
                                                     <a href="#"><span class="lnr lnr-heart"></span></a>
                                                     <a href="#"><span class="lnr lnr-layers"></span></a>
                                                     <a href="#"><span class="lnr lnr-cart"></span></a>
-                                                    <a href="#" data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                                                    <a href="<c:url value="/product/detail/${p.id}"/>"  data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -105,16 +107,10 @@
                                             <h5>${p.name}</h5>
 
                                             <h3><fmt:formatNumber type="currency"
-                                                          value="${p.product_detail.price}"
+                                                          value="${p.price}"
                                                           currencySymbol="VND"/></h3>
                                         </div>
-                                        <td>
-                                            <button onclick="location.href = '<c:url value="/product/detail/${p.id}"/>'"
-                                                    class="btn btn-warning">
-                                                Detail
-                                            </button>
-
-                                        </td>
+                                        
                                     </div>
                                 </c:forEach>
                             </c:if> 
@@ -131,6 +127,7 @@
                                 <option value="1">Show 12</option>
                             </select>
                         </div>
+                        
                         <div class="pagination">
                             <a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
                             <a href="#" class="active">1</a>

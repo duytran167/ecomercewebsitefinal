@@ -34,28 +34,27 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "product")
 public class ProductEntity implements Serializable {
-    
-     @Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-     
+
     @Column(length = 50)
     private String name;
-    
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ProductStatus status;
-    
-    
-    
-    
-    @Column(length = 100)
+
+    @Column(length = 500)
     private String description;
+
+    @Column(name = "price")
+    private double price;
     
     @Temporal(TemporalType.DATE)
     @Column(name = "created_date")
     private Date createdDate;
-   
 
     public ProductEntity() {
     }
@@ -84,8 +83,6 @@ public class ProductEntity implements Serializable {
         this.status = status;
     }
 
-
-    
     public String getDescription() {
         return description;
     }
@@ -94,6 +91,14 @@ public class ProductEntity implements Serializable {
         this.description = description;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -106,8 +111,8 @@ public class ProductEntity implements Serializable {
     public void setCategory(CategoryEntity category) {
         this.category = category;
     }
-     
-     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY,
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Set<OrderDetailEntity> order_detail;
 
@@ -130,7 +135,7 @@ public class ProductEntity implements Serializable {
     public void setImage(Set<ImageEntity> image) {
         this.image = image;
     }
-     
+
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private Set<PromotionEntity> promotion;
@@ -142,24 +147,25 @@ public class ProductEntity implements Serializable {
     public void setPromotion(Set<PromotionEntity> promotion) {
         this.promotion = promotion;
     }
-    
-    @ManyToOne
-    @JoinColumn(name = "product_detail_id")
-    private ProductDetailEntity product_detail;
 
-    public ProductDetailEntity getProduct_detail() {
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private Set<ProductDetailEntity> product_detail;
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Set<ProductDetailEntity> getProduct_detail() {
         return product_detail;
     }
 
-    public void setProduct_detail(ProductDetailEntity product_detail) {
+    public void setProduct_detail(Set<ProductDetailEntity> product_detail) {
         this.product_detail = product_detail;
     }
-    
-    
 
-    
-
-    
-    }
-    
-       
+}

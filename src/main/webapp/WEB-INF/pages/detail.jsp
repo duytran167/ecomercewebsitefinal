@@ -65,7 +65,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                         
-                            <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/q1.jpg"/>" alt="">
+                            <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l8.jpg"/>" alt="">
                         
                     </div>
                     <div class="col-lg-6">
@@ -73,33 +73,47 @@
                             <div class="top">
                                 <h3 class="head">${products.name}</h3>
                                 <div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10"><fmt:formatNumber type="currency"
-                                                          value="${products.product_detail.price}"
+                                                          value="${products.price}"
                                                           currencySymbol="VND"/></span></div>
                                 <div class="category">Category: <span>${products.category.name}</span></div>
                                 <div class="available">Status: <span>${products.status}</span></div>
 
                                 <div class="sorting row product-options">
                                     
-                                    <div class="col-first">
+                                    <div class="col-lg-3">
                                     <h5>Size</h5>
-                                        <select class="input-select ">
-                                            <c:forEach var="s" items="${size}">
-                                                <option value="${s.id}">
-                                                    ${s.name}
-                                                </option>
-                                            </c:forEach>
-                                        </select>
+                                    <select class="input-select ">
+                                    <c:forEach var="s" items="${size}">
+                                        <c:if test="${product_detail.products.size.id == s.id}">
+                                            <option value="${s.id}" selected>
+                                                ${s.name}
+                                            </option>
+                                        </c:if> 
+                                        <c:if test="${product_detail.products.size.id != s.id}">
+                                            <option value="${s.id}">
+                                                ${s.name}
+                                            </option>
+                                        </c:if> 
+                                    </c:forEach>
+                                             </select> 
                                     </div>
                                     <div class="col-first">
                                     <h5>Color</h5>
                                          
-                                        <select name="color.id" class="input-select">
-                                            <c:forEach var="c" items="${color}">
-                                                <option value="${c.id}">
-                                                    ${c.name}
-                                                </option>
-                                            </c:forEach>
-                                        </select>
+                                        <select class="input-select ">
+                                    <c:forEach var="c" items="${color}">
+                                        <c:if test="${product_detail.products.color.id == c.id}">
+                                            <option value="${c.id}" selected>
+                                                ${c.name}
+                                            </option>
+                                        </c:if> 
+                                        <c:if test="${product_detail.products.color.id != c.id}">
+                                            <option value="${c.id}">
+                                                ${c.name}
+                                            </option>
+                                        </c:if> 
+                                    </c:forEach>
+                                             </select>
                                     
                                 </div>
                                 </div>
