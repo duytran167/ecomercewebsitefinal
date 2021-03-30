@@ -5,8 +5,12 @@
  */
 package com.mycompany.spring_mvc_project_final.service;
 
+import com.mycompany.spring_mvc_project_final.entities.ColorEntity;
+import com.mycompany.spring_mvc_project_final.entities.ProductDetailEntity;
 import com.mycompany.spring_mvc_project_final.entities.ProductEntity;
+import com.mycompany.spring_mvc_project_final.entities.SizeEntity;
 import com.mycompany.spring_mvc_project_final.repository.ProductRepository;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +45,26 @@ public class ProductService{
             return new ProductEntity();
         }
     }
+    public List<ColorEntity> getListColorDetails (int id) {
+        List<ColorEntity> list = new ArrayList<>();
+        ProductEntity a = findProductById(id);
+        for(ProductDetailEntity product : a.getProduct_detail()) {
+            
+          list.add(product.getColor());
+            
+        }
+        return list;
+    }
+    public List<SizeEntity> getListSizeDetails (int id) {
+        List<SizeEntity> list = new ArrayList<>();
+        ProductEntity a = findProductById(id);
+        for(ProductDetailEntity product : a.getProduct_detail()) {
+            
+          list.add(product.getSize());
+            
+        }
+        return list;
+    }
     
     public List<ProductEntity> getNewProducts(Date created_date){
         return (List<ProductEntity>) productRepository.findByNewProduct(created_date);
@@ -50,9 +74,7 @@ public class ProductService{
             return (List<ProductEntity>) productRepository.findByProductMostSell(price);
     }
 
-    public ProductEntity findById(int productId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
 
     

@@ -29,11 +29,6 @@ public class OrderDetailEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    
-    
-    
-    
      @Column(name = "price")
     private double price;
      
@@ -84,22 +79,19 @@ public class OrderDetailEntity {
 
     
 
-    @OneToMany(mappedBy = "order_detail", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    private Set<OrderEntity> order_detail;
+    
+    @ManyToOne
+    @JoinColumn(name = "orderId")
+    private OrderEntity orders;
 
-    public Set<OrderEntity> getOrder_detail() {
-        return order_detail;
+    public OrderEntity getOrders() {
+        return orders;
     }
 
-    public void setOrder_detail(Set<OrderEntity> order_detail) {
-        this.order_detail = order_detail;
+    public void setOrders(OrderEntity orders) {
+        this.orders = orders;
     }
 
-
-
-    
-    
     
     
     @ManyToOne
@@ -114,7 +106,9 @@ public class OrderDetailEntity {
         this.product = product;
     }
     
-    
+     public double getTotalAmount(){
+        return  getQuantity() * product.getPrice();
+    }
 
      
 }

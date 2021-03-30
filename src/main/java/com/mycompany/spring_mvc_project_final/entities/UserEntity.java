@@ -41,7 +41,8 @@ public class UserEntity extends Personal {
     @Column(unique = true, length = 100)
     private String email;
     private String password;
-
+    @Column(name = "address")
+    private String address;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserStatus status;

@@ -6,7 +6,9 @@
 package com.mycompany.spring_mvc_project_final.entities;
 
 import com.mycompany.spring_mvc_project_final.enums.OrderStatus;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,22 +40,21 @@ public class OrderEntity extends Personal{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Temporal(TemporalType.DATE)
+   
     @Column(name = "orderDate")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date orderDate;
+    private LocalDate orderDate;
     
     @Column(name = "totalPrice")
     private double totalPrice;
     
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    private OrderStatus status = OrderStatus.SHOPPING_CART;
     
     private String description;
     
-    @Transient
-     private String address; 
+     
     
     public OrderEntity() {
     }
@@ -66,13 +67,11 @@ public class OrderEntity extends Personal{
         this.id = id;
     }
 
-    
-
-    public Date getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -93,25 +92,30 @@ public class OrderEntity extends Personal{
     }
 
     
-    @ManyToOne
-    @JoinColumn(name = "order_detail_id")
-    private OrderDetailEntity order_detail;
+    @OneToMany(mappedBy = "orders", fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
+    private Set<OrderDetailEntity> orderDetailsList;
 
-    public OrderDetailEntity getOrder_detail() {
-        return order_detail;
+    public String getDescription() {
+        return description;
     }
 
-    public void setOrder_detail(OrderDetailEntity order_detail) {
-        this.order_detail = order_detail;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getAddress() {
-        return address;
+    public Set<OrderDetailEntity> getOrderDetailsList() {
+        return orderDetailsList;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setOrderDetailsList(Set<OrderDetailEntity> orderDetailsList) {
+        this.orderDetailsList = orderDetailsList;
     }
+
+    
+    
+
+    
     
     
     
@@ -134,5 +138,7 @@ public class OrderEntity extends Personal{
     public void setUser(UserEntity user) {
         this.user = user;
     }
+    
+    
     
 }

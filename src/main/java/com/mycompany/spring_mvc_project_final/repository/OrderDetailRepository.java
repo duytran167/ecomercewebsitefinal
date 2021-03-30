@@ -5,9 +5,7 @@
  */
 package com.mycompany.spring_mvc_project_final.repository;
 
-import com.mycompany.spring_mvc_project_final.entities.CategoryEntity;
-import com.mycompany.spring_mvc_project_final.entities.ColorEntity;
-import com.mycompany.spring_mvc_project_final.entities.SizeEntity;
+import com.mycompany.spring_mvc_project_final.entities.OrderDetailEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +14,5 @@ import org.springframework.stereotype.Repository;
  * @author PC
  */
 @Repository
-public interface SizeRepository
-        extends CrudRepository<SizeEntity, Integer> {
-    SizeEntity findById(int id);
+public interface OrderDetailRepository extends CrudRepository<OrderDetailEntity, Integer>{
 }

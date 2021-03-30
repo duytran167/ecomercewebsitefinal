@@ -14,8 +14,8 @@
                 <ul class="list">
                     <li><a href="<c:url value="/admin/home"/>">login</a></li>
                     <li><a href="<c:url value="/logout"/>">logout</a></li>
-                    <li>
-<!--                        <div class="cart">
+<!--                    <li>
+                        <div class="cart">
                             <a href="#" > CART</a>
                             <span> <c:out value="${sessionScope.myCartNum}"/></span>
                         </div>
@@ -74,13 +74,12 @@
                         <div class="dropdown-menu">
 
                             <a class="dropdown-item" href="/product/detail">Single</a>
-                            <a class="dropdown-item" href="<c:url value="/cart/cart"/>">Cart</a>
+                            <a class="dropdown-item" href="<c:url value="/order/cart"/>">Cart</a>
                             <a class="dropdown-item" href="<c:url value="/checkout/checkout"/>">Checkout</a>
                             <a class="dropdown-item" href="confermation.html">Confermation</a>
                             <a class="dropdown-item" href="login.html">Login</a>
                             <a class="dropdown-item" href="tracking.html">Tracking</a>
-                            <a class="dropdown-item" href="generic.html">Generic</a>
-                            <a class="dropdown-item" href="elements.html">Elements</a>
+                            
                         </div>
                     </li>									
                 </ul>

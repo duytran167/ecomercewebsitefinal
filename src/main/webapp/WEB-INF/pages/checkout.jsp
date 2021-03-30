@@ -6,6 +6,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form"
            prefix="mvc" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -39,9 +40,7 @@
                         <nav class="d-flex align-items-center justify-content-start">
                             <a href="index.html">Home<i class="fa fa-caret-right" aria-hidden="true"></i></a>
                             <a href="checkout.html">
-                                <c:if test="${action=='add'}">
-                                    <h2>Product Checkout</h2>
-                                </c:if>
+
                             </a>
                         </nav>
                     </div>
@@ -101,90 +100,93 @@
         <!-- End Checkout Area -->
         <!-- Start Billing Details Form -->
         <div class="container">
-            <mvc:form action="${pageContext.request.contextPath}/${action}"
-                      method="post" modelAttribute="orders" enctype="multipart/form-data" class="billing-form">
-           
+            <mvc:form modelAttribute="orders" action="saveOrder" method="post" style="width: 100%;" >
+
                 <div class="row">
-                    
+
                     <div class="col-lg-8 col-md-6">
                         <h3 class="billing-title mt-20 mb-10">Billing Details</h3>
-                        <div class="row">
-                            
+                        
+                            <div class="row">
+                                <div class="col-lg-12">
 
-                            <div class="col-lg-12">
-                                <input type="text"  name="orders.full_name" placeholder="Full name*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Full name*'" required class="common-input">
+                                    <mvc:input onblur="this.placeholder = 'Full name*'" type="text" placeholder="Full name*" path="fullName" required="true" />
+
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <mvc:input placeholder="Phone number*" onfocus="this.placeholder = ''" type="text" onblur="this.placeholder = 'Phone number*'" path="phoneNumber" required="true" />
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <mvc:input type="email" placeholder="Email Address*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address*'" path="email" required="true" />
+
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <mvc:input type="text" placeholder="Address line 01*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address line 01*'" path="address" required="true" />
+
+                                </div>
+                                    
+
                             </div>
-
-                            <div class="col-lg-6">
-                                <input type="text"  name="orders.phone_number" placeholder="Phone number*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone number*'" required class="common-input">
-                            </div>
-                            <div class="col-lg-6">
-                                <input type="email"  name="orders.email" placeholder="Email Address*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address*'" required class="common-input">
-                            </div>
-
-                            <div class="col-lg-12">
-                                <input type="text"  name="orders.address" placeholder="Address line 01*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address line 01*'" required class="common-input">
-                            </div>
-
-
-
-                            
-                        </div>
-                        <div class="mt-20">
-                            <input type="checkbox" class="pixel-checkbox" id="login-3">
-                            <label for="login-3">Create an account?</label>
-                        </div>
+                        
+                        
                         <h3 class="billing-title mt-20 mb-10">Billing Details</h3>
-                        <div class="mt-20">
-                            <input type="checkbox" class="pixel-checkbox" id="login-6">
-                            <label for="login-6">Ship to a different address?</label>
-                        </div>
+                        
                         <textarea placeholder="Order Notes"  name="orders.description" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Order Notes'" required class="common-textarea"></textarea>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="order-wrapper mt-50">
                             <h3 class="billing-title mb-10">Your Order</h3>
                             <div class="order-list">
-                                <div class="list-row d-flex justify-content-between">
-                                    <div>Product</div>
-                                    <div>Total</div>
-                                </div>
-                                <div class="list-row d-flex justify-content-between">
-                                    <div>Pixelstore fresh Blackberry</div>
-                                    <div>x 02</div>
-                                    <div>$720.00</div>
-                                </div>
-                                <div class="list-row d-flex justify-content-between">
-                                    <div>Pixelstore fresh Blackberry</div>
-                                    <div>x 02</div>
-                                    <div>$720.00</div>
-                                </div>
-                                <div class="list-row d-flex justify-content-between">
-                                    <div>Pixelstore fresh Blackberry</div>
-                                    <div>x 02</div>
-                                    <div>$720.00</div>
-                                </div>
+                                <c:set var="totalCart" value="0"></c:set>
+                                <c:forEach var="cart" items="${cart}">
+                                    <c:set var="totalCart" value="${totalCart + cart.totalAmount}"></c:set>
+                                    <c:set var="totalShip" value="30000"></c:set>
+                                    <c:set var="totalCartShip" value="${totalCart + totalShip}"></c:set>
+                                        <div class="list-row d-flex justify-content-between">
+                                            <div><h6>Product</h6></div>
+                                            <div><h6>Price</h6></div>
+                                        </div>
+
+
+                                        <div class="list-row d-flex justify-content-between">
+                                            <div>${cart.product.name}</div>
+                                        <div>${cart.quantity}</div>
+                                        <div><fmt:formatNumber type="currency"
+                                                          value="${cart.totalAmount}"
+                                                          currencySymbol="VND"/></div>
+                                    </div>
+                                </c:forEach>
                                 <div class="list-row d-flex justify-content-between">
                                     <h6>Subtotal</h6>
-                                    <div>$2160.00</div>
+                                    <div><fmt:formatNumber type="currency"
+                                                      value="${totalCart}"
+                                                      currencySymbol="VND"/></div>
                                 </div>
+
                                 <div class="list-row d-flex justify-content-between">
                                     <h6>Shipping</h6>
-                                    <div>Flat rate: $50.00</div>
+                                    <div> <fmt:formatNumber type="currency"
+                                                      value="${totalShip}"
+                                                      currencySymbol="VND"/></div>
                                 </div>
                                 <div class="list-row d-flex justify-content-between">
                                     <h6>Total</h6>
-                                    <div class="total">$2210.00</div>
+                                    <div class="total"><fmt:formatNumber type="currency"
+                                                      value="${totalCartShip}"
+                                                      currencySymbol="VND"/></div>
                                 </div>
                                 <div class="d-flex align-items-center mt-10">
                                     <input class="pixel-radio" type="radio" id="check" name="brand">
-                                    <label for="check" class="bold-lable">Check payments</label>
+                                    <label for="check" class="bold-lable">Cash On Delivery</label>
                                 </div>
                                 <p class="payment-info">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex align-items-center">
                                         <input class="pixel-radio" type="radio" id="paypal" name="brand">
-                                        <label for="paypal" class="bold-lable">Paypal</label>
+                                        <label for="paypal" class="bold-lable">Bank</label>
                                     </div>
                                     <img src="img/organic-food/pm.jpg" alt="" class="img-fluid">
                                 </div>
@@ -193,9 +195,10 @@
                                     <input type="checkbox" class="pixel-checkbox" id="login-4">
                                     <label for="login-4">I’ve read and accept the <a href="#" class="terms-link">terms & conditions*</a></label>
                                 </div>
-                                <button class="view-btn color-2 w-100 mt-20"><span>Proceed to Checkout</span></button>
+                                <input class="view-btn color-2 w-100 mt-20" type="submit" value="Order Now">
                             </div>
                         </div>
+
                     </div>
                 </div>
             </mvc:form>

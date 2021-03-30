@@ -31,7 +31,7 @@
         <!-- Start Header Area -->
         <jsp:include page="include/menu1.jsp" />
         <!-- End Header Area -->
-        
+
         <!-- Start Banner Area -->
         <section class="banner-area organic-breadcrumb">
             <div class="container">
@@ -86,34 +86,41 @@
                     <!-- Start Best Seller -->
                     <section class="lattest-product-area pb-40 category-list">
                         <div class="row">
-                            <c:if test="${products != null && fn:length(products)>0}">
-                                <c:forEach var="p" items="${products}">
+                            <c:if test="${product != null && fn:length(product)>0}">
+                                <c:forEach var="product" items="${product}">
                                     <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 single-product">
                                         <div class="content">
                                             <div class="content-overlay"></div>
-                                            
+
                                             <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l8.jpg"/>" alt="">
                                             <div class="content-details fadeIn-bottom">
                                                 <div class="bottom d-flex align-items-center justify-content-center">
                                                     <a href="#"><span class="lnr lnr-heart"></span></a>
                                                     <a href="#"><span class="lnr lnr-layers"></span></a>
-                                                    <a href="#"><span class="lnr lnr-cart"></span></a>
-                                                    <a href="<c:url value="/product/detail/${p.id}"/>"  data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                                                    <a href="${pageContext.request.contextPath}/order/addToCart/${product.id}"><span class="lnr lnr-cart"></span></a>
+                                                    <a href="<c:url value="/product/detail/${product.id}"/>"  data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="price">
-                                            <h5>${p.name}</h5>
+                                            <h5>${product.name}</h5>
 
                                             <h3><fmt:formatNumber type="currency"
-                                                          value="${p.price}"
-                                                          currencySymbol="VND"/></h3>
+                                                              value="${product.price}"
+                                                              currencySymbol="VND"/></h3>
                                         </div>
-                                        
+
                                     </div>
                                 </c:forEach>
                             </c:if> 
+                            <c:if test="${product == null || fn:length(product)<=0}">
+                            <tr>
+                                <td style="color: red" colspan="7">
+                                    Not Found !!!
+                                </td>
+                            </tr>
+                        </c:if>
 
                         </div>
                     </section>
@@ -127,7 +134,7 @@
                                 <option value="1">Show 12</option>
                             </select>
                         </div>
-                        
+
                         <div class="pagination">
                             <a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
                             <a href="#" class="active">1</a>

@@ -44,7 +44,8 @@ public class Personal {
     @Enumerated(EnumType.STRING)
     private Gender gender = Gender.MALE;
     
-    @Transient
+    
+    @Column(name ="address")
      private String address;
 
     public Personal() {

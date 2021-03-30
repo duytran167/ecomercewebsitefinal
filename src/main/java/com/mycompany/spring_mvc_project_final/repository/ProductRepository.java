@@ -19,6 +19,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends CrudRepository<ProductEntity, Integer>  {
     
+    
+    
+    
+    ProductEntity findByName(String name);
+    ProductEntity deleteById(int id);
+    
      List<ProductEntity>findByNameContainingOrCategoryNameContaining(String name1, String name2);
      
      @Query(value = "Select * from product p order by p.created_date desc limit 4", nativeQuery = true)
@@ -26,6 +32,8 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Integer
      
      @Query(value = "Select * from product p order by p.price desc limit 4", nativeQuery = true)
      List<ProductEntity>findByProductMostSell(String price);
+     
+    
      
     
      

@@ -4,6 +4,7 @@
     Author     : PC
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -50,49 +51,76 @@
         <!-- End Banner Area -->
 
         <!-- Start Cart Area -->
-        <div class="container">
-            <div class="cart-title">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h6 class="ml-15">Product</h6>
-                    </div>
-                    <div class="col-md-2">
-                        <h6>Price</h6>
-                    </div>
-                    <div class="col-md-2">
-                        <h6>Quantity</h6>
-                    </div>
-                    <div class="col-md-2">
-                        <h6>Total</h6>
-                    </div>
-                </div>
-            </div>
-
-
             <div class="container">
-                <div class="content">
-                    <div class="shopping_cart">
-                        <c:forEach var="map" items="${sessionScope.myCartItems}">
-                            <div class="cart_box">
-                                <div class="message">
-                                    <div class="list_img"><img src="${pageContext.request.contextPath}/resources/pages/images/pi1.jpg" class="img-responsive" alt=""></div>
-                                    <div class="list_close"><a href="${pageContext.request.contextPath}/cart/remove/${map.value.product.productId}.html">Remove item</a></div> 
-                                    <div class="list_desc"><h4><a href="#"><c:out value="${map.value.product.productName}"/></a></h4><c:out value="${map.value.quantity}"/> x
-                                        $<c:out value="${map.value.product.productPrice}"/> = <span class="actual">  $<c:out value="${map.value.quantity * map.value.product.productPrice}"/></span></div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </c:forEach>
+                <div class="cart-title">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6 class="ml-15">Product</h6>
+                        </div>
+                        <div class="col-md-2">
+                            <h6>Price</h6>
+                        </div>
+                        <div class="col-md-2">
+                            <h6>Quantity</h6>
+                        </div>
+                        <div class="col-md-2">
+                            <h6>Total</h6>
+                        </div>
                     </div>
-
-
-
                 </div>
-                <div class="clearfix"></div>
-
-
+                
+                
+                <div class="cart-single-item">
+                    <c:set var="totalCart" value="0"></c:set>
+                <c:forEach var="cart" items="${cart}">
+                    <c:set var="totalCart" value="${totalCart + cart.totalAmount}"></c:set>
+                    <div class="row align-items-center">
+                        <div class="col-md-4 col-12">
+                            <div class="product-item d-flex align-items-center">
+                                <img src="img/ci3.jpg" class="img-fluid" alt="">
+                                <h6>${cart.product.name}</h6>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-6">
+                            <div class="price"><fmt:formatNumber type="currency"
+                                                              value="${cart.product.price}"
+                                                              currencySymbol="VND"/></div>
+                        </div>
+                        <div class="col-md-2 col-6">
+                            <form action="${pageContext.request.contextPath}/order/update" method="post">
+                            <div class="quantity-container d-flex align-items-center mt-15">
+                                
+                                <input type="hidden" name="id" value="${cart.product.id}">
+                                <input type="text" class="quantity-amount" name="quantity" value="${cart.quantity}" id="quantity" >                               
+                                <div class="arrow-btn d-inline-flex flex-column">
+                                    <button class="increase arrow" type="button" title="Increase Quantity"><span class="lnr lnr-chevron-up"></span></button>
+                                    <button class="decrease arrow" type="button" title="Decrease Quantity"><span class="lnr lnr-chevron-down"></span></button>
+                                </div>
+                                <input class=" info-border circle" type="submit" value="Update">
+                                
+                            </div>
+                                </form>
+                        </div>
+                        <div class="col-md-2 col-12">
+                            <div class="total"> <fmt:formatNumber type="currency"
+                                                              value="${cart.totalAmount}"
+                                                              currencySymbol="VND"/>
+                            </div>
+                            
+                            
+                        </div>
+                            <div class="col-md-2 col-12">
+                            <a href="${pageContext.request.contextPath}/order/remove/${cart.product.id}" class="genric-btn danger-border circle">Delete</a>
+                        </div>
+                    </div>
+                </c:forEach>
+                </div>
                 <div class="cupon-area d-flex align-items-center justify-content-between flex-wrap">
-                    <a href="#" class="view-btn color-2"><span>Update Cart</span></a>
+
+                        <form action="${pageContext.request.contextPath}/product/category" >
+                        <input type="hidden" name="action" value="shopping">
+                        <input type="submit" class="view-btn color-2" value="Continue Shopping">
+                    </form>
                     <div class="cuppon-wrap d-flex align-items-center flex-wrap">
                         <div class="cupon-code">
                             <input type="text">
@@ -103,154 +131,35 @@
                 </div>
                 <div class="subtotal-area d-flex align-items-center justify-content-end">
                     <div class="title text-uppercase">Subtotal</div>
-                    <div class="subtotal">$<c:out value="${sessionScope.myCartTotal}"/></div>
+                    <div class="subtotal"><fmt:formatNumber type="currency"
+                                                              value="${totalCart}"
+                                                              currencySymbol="VND"/></div>
                 </div>
                 <div class="shipping-area d-flex justify-content-end">
-                    
-                    <form action="#" class="d-inline-flex flex-column align-items-end">
+                    <div class="tile text-uppercase">Shipping</div>
+                    <form action="${pageContext.request.contextPath}/order/checkout" method="get" class="d-inline-flex flex-column align-items-end">
                         <ul class="d-flex flex-column align-items-end">
-
                             
-                            <div class="total">
-                                
-
-                                <div class="total_right" type="currency">Shipping: 30000 VND </div>
-                                <div class="clearfix"> </div>
-                                <div class="total_right">Pay: $<c:out value="${sessionScope.myCartTotal + (sessionScope.myCartTotal + 30000)}"/></div>
-                                <div class="clearfix"> </div>
-                            </div>
+                            
+                            <li class="filter-list">
+                                <label for="local-delivery">Local Delivery:<span>$2.00</span></label>
+                                <input class="pixel-radio" type="radio" id="local-delivery" name="brand">
+                            </li>
+                            <li class="calculate">Calculate Shipping</li>
                         </ul>
-
-
-                        <button class="view-btn color-2 mt-10"><span><a href="<c:url value="/checkout/checkout"/>">Check Out</span></button>
+                        <input type="hidden" name="action" value="checkout">
+                        <input class="view-btn color-2 mt-10" type="submit" value="Checkout">
                     </form>
+                   
 
                 </div>
             </div>
-        </div>
-        <!-- End Cart Area -->
 
-        <!-- Start Most Search Product Area -->
-        <section class="section-half">
-            <div class="container">
-                <div class="organic-section-title text-center">
-                    <h3>Most Searched Products</h3>
-                </div>
-                <div class="row mt-30">
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-search-product d-flex">
-                            <a href="#"><img src="<c:url value='/resources/img/r1.jpg'/>" alt=""></a>
-                            <div class="desc">
-                                <a href="#" class="title">Pixelstore fresh Blueberry</a>
-                                <div class="price"><span class="lnr lnr-tag"></span> $240.00</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-search-product d-flex">
-                            <a href="#"><img src="<c:url value='/resources/img/r2.jpg'/>" alt=""></a>
-                            <div class="desc">
-                                <a href="#" class="title">Pixelstore fresh Cabbage</a>
-                                <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-search-product d-flex">
-                            <a href="#"><img src="<c:url value='/resources/img/r3.jpg'/>" alt=""></a>
-                            <div class="desc">
-                                <a href="#" class="title">Pixelstore fresh Raspberry</a>
-                                <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-search-product d-flex">
-                            <a href="#"><img src="<c:url value='/resources/img/r4.jpg'/>" alt=""></a>
-                            <div class="desc">
-                                <a href="#" class="title">Pixelstore fresh Kiwi</a>
-                                <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-search-product d-flex">
-                            <a href="#"><img src="<c:url value='/resources/img/r5.jpg'/>" alt=""></a>
-                            <div class="desc">
-                                <a href="#" class="title">Pixelstore Bell Pepper</a>
-                                <div class="price"><span class="lnr lnr-tag"></span> $120.00</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-search-product d-flex">
-                            <a href="#"><img src="<c:url value='/resources/img/r6.jpg'/>" alt=""></a>
-                            <div class="desc">
-                                <a href="#" class="title">Pixelstore fresh Blackberry</a>
-                                <div class="price"><span class="lnr lnr-tag"></span> $120.00</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-search-product d-flex">
-                            <a href="#"><img src="<c:url value='/resources/img/r7.jpg'/>" alt=""></a>
-                            <div class="desc">
-                                <a href="#" class="title">Pixelstore fresh Brocoli</a>
-                                <div class="price"><span class="lnr lnr-tag"></span> $120.00</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-search-product d-flex">
-                            <a href="#"><img src="<c:url value='/resources/img/r8.jpg'/>" alt=""></a>
-                            <div class="desc">
-                                <a href="#" class="title">Pixelstore fresh Carrot</a>
-                                <div class="price"><span class="lnr lnr-tag"></span> $120.00</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-search-product d-flex">
-                            <a href="#"><img src="<c:url value='/resources/img/r9.jpg'/>" alt=""></a>
-                            <div class="desc">
-                                <a href="#" class="title">Pixelstore fresh Strawberry</a>
-                                <div class="price"><span class="lnr lnr-tag"></span> $240.00</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-search-product d-flex">
-                            <a href="#"><img src="<c:url value='/resources/img/r10.jpg'/>" alt=""></a>
-                            <div class="desc">
-                                <a href="#" class="title">Prixma MG2 Light Inkjet</a>
-                                <div class="price"><span class="lnr lnr-tag"></span> $240.00</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-search-product d-flex">
-                            <a href="#"><img src="<c:url value='/resources/img/r11.jpg'/>" alt=""></a>
-                            <div class="desc">
-                                <a href="#" class="title">Pixelstore fresh Cherry</a>
-                                <div class="price"><span class="lnr lnr-tag"></span> $240.00 <del>$340.00</del></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-search-product d-flex">
-                            <a href="#"><img src="<c:url value='/resources/img/r12.jpg'/>" alt=""></a>
-                            <div class="desc">
-                                <a href="#" class="title">Pixelstore fresh Beans</a>
-                                <div class="price"><span class="lnr lnr-tag"></span> $240.00 <del>$340.00</del></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <jsp:include page="include/footer.jsp"/>
-        <jsp:include page="include/js-page.jsp"/>  
+<!-- Start Most Search Product Area -->
+
+<jsp:include page="include/footer.jsp"/>
+<jsp:include page="include/js-page.jsp"/>  
 
 
-    </body>
+</body>
 </html>

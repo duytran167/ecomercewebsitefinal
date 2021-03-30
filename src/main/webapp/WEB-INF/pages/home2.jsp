@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="row">                    
-                        <c:forEach var="p" items="${products}">
+                        <c:forEach var="p" items="${product}">
                             <div class="col-lg-3 col-md-6 single-product">
                                 <div class="content">
                                     <div class="content-overlay"></div>

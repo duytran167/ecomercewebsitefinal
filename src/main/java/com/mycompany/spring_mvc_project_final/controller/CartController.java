@@ -31,37 +31,9 @@ public class CartController {
     @Autowired
     private ProductService productService;
     
-    @RequestMapping(value = {"/cart"}, method = RequestMethod.GET)
-    public String cart(Model model) {
-        
-        return "cart";
-    }
+   
     
     
-//    @RequestMapping(value = "checkout", method = RequestMethod.POST)
-//public String viewCheckout(ModelMap mm, HttpSession session, @ModelAttribute("receipt") Receipt receipt) {
-//        HashMap<Long, OrderEntity> cartItems = (HashMap<Long, OrderEntity>) session.getAttribute("myCartItems");
-//        if (cartItems == null) {
-//            cartItems = new HashMap<>();
-//        }
-//        receipt.setReceiptDate(new Timestamp(new Date().getTime()));
-//        receipt.setReceiptStatus(true);
-//        receiptService.create(receipt);
-//        for (Map.Entry<Long, OrderEntity> entry : cartItems.entrySet()) {
-//            ReceiptItem receiptItem = new ReceiptItem();
-//            receiptItem.setReceipt(receipt);
-//            receiptItem.setProduct(entry.getValue().getProduct());
-//            receiptItem.setReceiptItemPrice(entry.getValue().getProduct().getProductPrice());
-//            receiptItem.setReceiptItemSale(entry.getValue().getProduct().getProductSale());
-//            receiptItem.setReceiptItemQuantity(entry.getValue().getQuantity());
-//            receiptItem.setReceiptItemStatus(true);
-//            receiptItemService.create(receiptItem);
-//        }
-//        cartItems = new HashMap<>();
-//        session.setAttribute("myCartItems", cartItems);
-//        session.setAttribute("myCartTotal", 0);
-//        session.setAttribute("myCartNum", 0);
-//        return "pages/success";
-//}
+
     
 }

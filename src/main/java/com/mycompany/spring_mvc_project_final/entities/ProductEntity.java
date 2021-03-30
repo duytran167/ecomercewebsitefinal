@@ -148,7 +148,7 @@ public class ProductEntity implements Serializable {
         this.promotion = promotion;
     }
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     private Set<ProductDetailEntity> product_detail;
 
@@ -168,4 +168,5 @@ public class ProductEntity implements Serializable {
         this.product_detail = product_detail;
     }
 
+    
 }

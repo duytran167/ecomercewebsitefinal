@@ -38,7 +38,6 @@ public class ProductController {
     private ProductService productService;
 
     
-    
     @Autowired
     private CategoryService categoryService;
     
@@ -56,24 +55,27 @@ public class ProductController {
         webDataBinder.registerCustomEditor(String.class, stringTrimerEditor);
     }
 
+    //list product
     @RequestMapping(value = {"/category"}, method = RequestMethod.GET)
     public String categoryList(Model model) {
-        model.addAttribute("products", productService.getProducts());
+        model.addAttribute("product", productService.getProducts());
         return "category";
     }
     
+    // detail product
     @RequestMapping(value ="/detail/{id}", method = RequestMethod.GET)
     public String detail(Model model,
-            @PathVariable("id") int id) {
-        model.addAttribute("products", productService.findProductById(id));
+            @PathVariable("id") int id) {        
+        model.addAttribute("product", productService.findProductById(id));
         model.addAttribute("categories",
                 categoryService.getCategories());
-       
-        model.addAttribute("size", sizeService.getSize());
-        model.addAttribute("color", colorService.getColor());
-        
+        model.addAttribute("color", productService.getListColorDetails(id));
+        model.addAttribute("size", productService.getListSizeDetails(id));
+        model.addAttribute("action", "addcart");
+
         return "detail";
     }
+    
 
 }
     

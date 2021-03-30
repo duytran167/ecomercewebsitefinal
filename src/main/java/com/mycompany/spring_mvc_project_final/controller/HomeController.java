@@ -34,8 +34,8 @@ public class HomeController {
     public String welcomePage(Model model, @ModelAttribute("created_date") Date created_date, 
             @ModelAttribute("price") String price ) {
         model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        model.addAttribute("products", productService.getNewProducts(created_date));
+        model.addAttribute("message", "WELCOME SHOPPING WITH US!");
+        model.addAttribute("product", productService.getNewProducts(created_date));
         model.addAttribute("productsell", productService.getProductsMostSell(price));
         
         List<String> roles = SecurityUtils.getRolesOfUser();

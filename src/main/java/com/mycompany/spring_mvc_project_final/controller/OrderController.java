@@ -1,112 +1,153 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.spring_mvc_project_final.controller;
 
+import com.mycompany.spring_mvc_project_final.component.CartEntity;
+import com.mycompany.spring_mvc_project_final.entities.ColorEntity;
 import com.mycompany.spring_mvc_project_final.entities.OrderDetailEntity;
 import com.mycompany.spring_mvc_project_final.entities.OrderEntity;
 import com.mycompany.spring_mvc_project_final.entities.ProductEntity;
+import com.mycompany.spring_mvc_project_final.repository.ColorRepository;
+import com.mycompany.spring_mvc_project_final.repository.OrderDetailRepository;
+import com.mycompany.spring_mvc_project_final.repository.OrderRepository;
+import com.mycompany.spring_mvc_project_final.repository.ProductDetailRepository;
+import com.mycompany.spring_mvc_project_final.repository.ProductRepository;
+import com.mycompany.spring_mvc_project_final.repository.SizeRepository;
 import com.mycompany.spring_mvc_project_final.service.CategoryService;
+import com.mycompany.spring_mvc_project_final.service.ColorService;
+import com.mycompany.spring_mvc_project_final.service.ImageService;
 import com.mycompany.spring_mvc_project_final.service.OrderService;
+import com.mycompany.spring_mvc_project_final.service.ProductDetailService;
 import com.mycompany.spring_mvc_project_final.service.ProductService;
-import java.util.HashMap;
-import java.util.Map;
-import javax.servlet.http.HttpSession;
+import com.mycompany.spring_mvc_project_final.service.SizeService;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
  * @author PC
  */
 @Controller
-@RequestMapping("/checkout")
+@Scope(value = "session")
+@RequestMapping("/order")
 public class OrderController {
     @Autowired
     private OrderService orderService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private ImageService imageService;
+    @Autowired
+    private SizeService sizeService;
+    @Autowired
+    private OrderRepository orderRepository;
+    
+    @Autowired
+    private ColorService colorService;
+    @Autowired
+    private ProductDetailService productDetailService;
+    @Autowired
+    OrderDetailRepository orderDetailsRepository;
+    
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private ColorRepository colorRepository;
+    @Autowired
+    private SizeRepository sizeRepository;
+    @Autowired
+    CartEntity cart;
     
     
+    @Autowired
+    private ProductDetailRepository productDetailRepository;
     
     
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value = "add/{productId}", method = RequestMethod.GET)
-    public String viewAdd(ModelMap mm, HttpSession session, @PathVariable("productId") int productId) {
-        HashMap<Integer, OrderDetailEntity> cartItems = (HashMap<Integer, OrderDetailEntity>) session.getAttribute("myCartItems");
-        if (cartItems == null) {
-            cartItems = new HashMap<>();
-        }
-        ProductEntity product = productService.findById(productId);
-        if (product != null) {
-            if (cartItems.containsKey(productId)) {
-                OrderDetailEntity item = cartItems.get(productId);
-                item.setProduct(product);
-                item.setQuantity(item.getQuantity() + 1);
-                cartItems.put(productId, item);
-            } else {
-                OrderDetailEntity item = new OrderDetailEntity();
-                item.setProduct(product);
-                item.setQuantity(1);
-                cartItems.put(productId, item);
-            }
-        }
-        session.setAttribute("myCartItems", cartItems);
-        session.setAttribute("myCartTotal", totalPrice(cartItems));
-        session.setAttribute("myCartNum", cartItems.size());
-        return "cart";
-    }
-
-    @RequestMapping(value = "sub/{productId}", method = RequestMethod.GET)
-    public String viewUpdate(ModelMap mm, HttpSession session, @PathVariable("productId") int productId) {
-        HashMap<Integer, OrderDetailEntity> cartItems = (HashMap<Integer, OrderDetailEntity>) session.getAttribute("myCartItems");
-        if (cartItems == null) {
-            cartItems = new HashMap<>();
-        }
-        session.setAttribute("myCartItems", cartItems);
-        return "cart";
-    }
-
-    @RequestMapping(value = "remove/{productId}", method = RequestMethod.GET)
-    public String viewRemove(ModelMap mm, HttpSession session, @PathVariable("productId") int productId) {
-        HashMap<Integer, OrderDetailEntity> cartItems = (HashMap<Integer, OrderDetailEntity>) session.getAttribute("myCartItems");
-        if (cartItems == null) {
-            cartItems = new HashMap<>();
-        }
-        if (cartItems.containsKey(productId)) {
-            cartItems.remove(productId);
-        }
-        session.setAttribute("myCartItems", cartItems);
-        session.setAttribute("myCartTotal", totalPrice(cartItems));
-        session.setAttribute("myCartNum", cartItems.size());
-        return "pages/cart";
-    }
-
-    public double totalPrice(HashMap<Integer, OrderDetailEntity> cartItems) {
-        int count = 0;
-        for (Map.Entry<Integer, OrderDetailEntity> list : cartItems.entrySet()) {
-            count += list.getValue().getProduct().getPrice() * list.getValue().getQuantity();
-        }
-        return count;
-    }
-
-    @RequestMapping(value = {"/checkout"}, method = RequestMethod.GET)
-    public String checkOut(Model model) {
+    //Add to cart
+    @RequestMapping(value = "/addToCart/{id}", method = RequestMethod.GET)
+    public String addToCarts(@PathVariable(value = "id") int id, Model model){
+         ProductEntity product = (ProductEntity)productService.findProductById(id);
+        cart.addItem(product);
         
-        return "checkout";
+        model.addAttribute("cart", cart.getOrderDetailList());
+        
+        return "cart"; //Return Cart.jsp
     }
+    @RequestMapping(value = {"/cart"}, method = RequestMethod.GET)
+    public String categoryList(Model model) {
+        model.addAttribute("cart", cart.getOrderDetailList());
+        return "cart";
+    }
+
+    //Remove product
+    @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
+    public String removeItem(@PathVariable(value = "id") int id, Model model) {
+        //Get Item
+        ProductEntity product = (ProductEntity)productService.findProductById(id);
+        
+        //Remove Item
+        cart.removeItem(product);
+        
+        //List lai trang Cart
+        model.addAttribute("cart", cart.getOrderDetailList());
+        return "cart"; 
+        
+    }
+    
+    //Update quantity
+    @RequestMapping(value="/update", method = RequestMethod.POST)
+    public String updateQuantity(Model model,@RequestParam(name= "id")int id,
+            @RequestParam(name= "quantity")int quantity, ProductEntity product){
+       List<OrderDetailEntity> orderDetailsList = cart.getOrderDetailsList();
+       for(int i= 0; i<orderDetailsList.size();i++){
+          if(orderDetailsList.get(i).getProduct().getId() == product.getId()){
+              OrderDetailEntity orderDetail = orderDetailsList.get(i);
+              orderDetail.setQuantity(quantity);
+              orderDetailsList.set(i, orderDetail);
+              cart.setOrderDetailsList(orderDetailsList);
+          }
+        }
+       model.addAttribute("cart", cart.getOrderDetailList());
+        return "cart";
+    }
+    
+    
+    
+    //Checkout
+    @RequestMapping(value = "/checkout", method = RequestMethod.GET)
+    public String checkout(Model model){
+        
+        model.addAttribute("cart", cart.getOrderDetailList());
+        
+        model.addAttribute("orders", new OrderEntity()); //model.addAttribute ben modelAttribute ben checkout.jsp
+        model.addAttribute("orderDetails", new OrderDetailEntity());
+        return "checkout"; //Return Checkout.jsp
+    }
+    //Save checkout
+    @RequestMapping(value = "/saveOrder", method = RequestMethod.POST) //update ben action ben editBook.jsp
+    public String saveCheckout(OrderEntity orders,  Model model) {
+        //Save vao bang Orders
+        orders.setOrderDate(LocalDate.now());        
+        OrderEntity newOrder = orderRepository.save(orders);
+        
+        //Save vao bang Order Details
+        List<OrderDetailEntity> orderDetailsList = cart.getOrderDetailsList();
+        for(OrderDetailEntity orderDetails : orderDetailsList){
+            orderDetails.setOrders(newOrder);
+            orderDetailsRepository.save(orderDetails);
+        } 
+        model.addAttribute("cart", cart.getOrderDetailList());
+        return "confirmation"; //goi lai confirmation.jsp
+    }
+
 }
-
-    
-    
-
