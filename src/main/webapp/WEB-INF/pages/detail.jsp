@@ -7,6 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags/form"
+           prefix="mvc" %>
 
 <!DOCTYPE html>
 <html>
@@ -19,7 +21,7 @@
         <!-- Author Meta -->
         <meta name="author" content="CodePixar">
         <!-- Meta Description -->
-        <meta name="description" content="">
+        <meta name="description" content="NOI VUI VE">
         <!-- Meta Keyword -->
         <meta name="keywords" content="">
         <!-- meta character set -->
@@ -64,87 +66,90 @@
             <div class="product-quick-view">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
-                        
-                            <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l8.jpg"/>" alt="">
-                        
+
+                        <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l8.jpg"/>" alt="">
+
                     </div>
                     <div class="col-lg-6">
                         <div class="quick-view-content">
-                            <div class="top">
-                                <h3 class="head">${products.name}</h3>
-                                <div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10"><fmt:formatNumber type="currency"
-                                                          value="${products.price}"
-                                                          currencySymbol="VND"/></span></div>
-                                <div class="category">Category: <span>${products.category.name}</span></div>
-                                <div class="available">Status: <span>${products.status}</span></div>
+                            
+                                <div class="top">
+                                    <h3 class="head">${product.name}</h3>
+                                    <div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10"><fmt:formatNumber type="currency"
+                                                      value="${product.price}"
+                                                      currencySymbol="VND"/></span></div>
+                                    <div class="category">Category: <span>${product.category.name}</span></div>
+                                    <div class="available"><span>${product.status}</span></div>
 
-                                <div class="sorting row product-options">
-                                    
-                                    <div class="col-lg-3">
-                                    <h5>Size</h5>
-                                    <select class="input-select ">
-                                    <c:forEach var="s" items="${size}">
-                                        <c:if test="${product_detail.products.size.id == s.id}">
-                                            <option value="${s.id}" selected>
-                                                ${s.name}
-                                            </option>
-                                        </c:if> 
-                                        <c:if test="${product_detail.products.size.id != s.id}">
-                                            <option value="${s.id}">
-                                                ${s.name}
-                                            </option>
-                                        </c:if> 
-                                    </c:forEach>
-                                             </select> 
-                                    </div>
-                                    <div class="col-first">
-                                    <h5>Color</h5>
-                                         
-                                        <select class="input-select ">
-                                    <c:forEach var="c" items="${color}">
-                                        <c:if test="${product_detail.products.color.id == c.id}">
-                                            <option value="${c.id}" selected>
-                                                ${c.name}
-                                            </option>
-                                        </c:if> 
-                                        <c:if test="${product_detail.products.color.id != c.id}">
-                                            <option value="${c.id}">
-                                                ${c.name}
-                                            </option>
-                                        </c:if> 
-                                    </c:forEach>
-                                             </select>
-                                    
-                                </div>
-                                </div>
-                                
-                                    
 
-                            </div>
-                                
-                            <div class="middle">
-                                <p class="content">${products.description}</p>
-                            </div>
-                            <div>
-                                <div class="quantity-container d-flex align-items-center mt-15">
-                                    Quantity:
-                                    <input type="text" class="quantity-amount ml-15" value="1" />
-                                    <div class="arrow-btn d-inline-flex flex-column">
-                                        <button class="increase arrow" type="button" title="Increase Quantity"><span class="lnr lnr-chevron-up"></span></button>
-                                        <button class="decrease arrow" type="button" title="Decrease Quantity"><span class="lnr lnr-chevron-down"></span></button>
+                                    <div class="sorting row product-options">
+
+                                        <div class="col-lg-3">
+                                            <h5>Color</h5>
+
+                                            <select class="input-select" name="colorId">
+
+                                                <c:forEach items="${color}" var="c">
+
+                                                    <c:if test="${product_detail.product.color.id == c.id}">
+                                                        <option  value="${c.id}" selected="">${c.name}</option>
+                                                    </c:if>
+                                                    <c:if test="${product_detail.product.color.id != c.id}">
+                                                        <option  value="${c.id}">${c.name}</option>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </select>
+
+
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <h5>Size</h5>
+
+                                            <select class="input-select" name="sizeId">
+
+                                                <c:forEach items="${size}" var="s">
+
+                                                    <c:if test="${product_detail.product.size.id == s.id}">
+                                                        <option  value="${s.id}" selected="">${s.name}</option>
+                                                    </c:if>
+                                                    <c:if test="${product_detail.product.size.id != s.id}">
+                                                        <option  value="${s.id}">${s.name}</option>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </select>
+
+
+                                        </div>
                                     </div>
 
                                 </div>
-                                <div class="d-flex mt-20">
-                                    <a href="#" class="view-btn color-2"><span>Add to Cart</span></a>
-                                    <a href="#" class="like-btn"><span class="lnr lnr-layers"></span></a>
-                                    <a href="#" class="like-btn"><span class="lnr lnr-heart"></span></a>
+
+                                <div class="middle">
+                                    <p class="content">${product.description}</p>
                                 </div>
-                            </div>
+                                <div>
+                                    <div class="quantity-container d-flex align-items-center mt-15">
+                                        Quantity:
+                                        <input type="text" class="quantity-amount ml-15" value="1" />
+                                        <div class="arrow-btn d-inline-flex flex-column">
+                                            <button class="increase arrow" type="button" title="Increase Quantity"><span class="lnr lnr-chevron-up"></span></button>
+                                            <button class="decrease arrow" type="button" title="Decrease Quantity"><span class="lnr lnr-chevron-down"></span></button>
+                                        </div>
+
+                                    </div>
+                                    <div class="d-flex mt-20">
+                                        <button class="view-btn color-2" ><a href="${pageContext.request.contextPath}/order/addToCart/${product.id}"><span>Add to Cart</span></a> </button>
+                                        <a href="#" class="like-btn"><span class="lnr lnr-layers"></span></a>
+                                        <a href="#" class="like-btn"><span class="lnr lnr-heart"></span></a>
+                                    </div>
+                                </div>
+                            
                         </div>
+
                     </div>
                 </div>
             </div>
+
 
         </div>
 
@@ -275,7 +280,7 @@
         <jsp:include page="include/js-page.jsp"/>   
         <!-- End footer Area -->      
         <!-- Modal Quick Product View -->
-          
+
 
 
     </body>
