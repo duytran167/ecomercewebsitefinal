@@ -5,8 +5,11 @@
  */
 package com.mycompany.spring_mvc_project_final.entities;
 
+import com.mycompany.spring_mvc_project_final.enums.Role;
 import com.mycompany.spring_mvc_project_final.enums.UserStatus;
+import jakarta.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,14 +23,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotBlank;
+
 import javax.validation.constraints.Size;
+import org.springframework.context.annotation.Scope;
 
 @Entity
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-public class UserEntity extends Personal {
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Scope("session")
+public class UserEntity extends Personal implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,20 +49,28 @@ public class UserEntity extends Personal {
     @Column(unique = true, length = 100)
     private String email;
     private String password;
-    @Column(name = "address")
-    private String address;
+    
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserStatus status;
+    @Column(name = "enabled")
+    private boolean enabled;
+    
+    @Column(name = "NoopPassword")
+    private String noopPassword;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "user_role_relationship",
-            joinColumns = @JoinColumn(name = "user_id",
-                    referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id",
-                    referencedColumnName = "id"))
-    private Set<UserRoleEntity> userRoles;
+    @Transient
+    private String passwordConfirm;
+    
+    @Enumerated(EnumType.STRING)
+    private Role role ;
+    
+    @OneToOne(mappedBy = "users")
+    private CreditCardEntity creditCard;
+    
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    List<OrderEntity> orderList;
 
     public UserEntity() {
     }
@@ -66,6 +82,23 @@ public class UserEntity extends Personal {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public String getNoopPassword() {
+        return noopPassword;
+    }
+
+    public void setNoopPassword(String noopPassword) {
+        this.noopPassword = noopPassword;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+    
 
     public String getEmail() {
         return email;
@@ -83,13 +116,7 @@ public class UserEntity extends Personal {
         this.password = password;
     }
 
-    public Set<UserRoleEntity> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(Set<UserRoleEntity> userRoles) {
-        this.userRoles = userRoles;
-    }
+    
 
     public UserStatus getStatus() {
         return status;
@@ -106,5 +133,41 @@ public class UserEntity extends Personal {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public CreditCardEntity getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCardEntity creditCard) {
+        this.creditCard = creditCard;
+    }
+
+    public List<OrderEntity> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<OrderEntity> orderList) {
+        this.orderList = orderList;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    
+    
+    
 
 }

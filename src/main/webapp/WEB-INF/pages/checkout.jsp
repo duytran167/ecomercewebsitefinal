@@ -100,7 +100,7 @@
         <!-- End Checkout Area -->
         <!-- Start Billing Details Form -->
         <div class="container">
-            <mvc:form modelAttribute="orders" action="saveOrder" method="post" style="width: 100%;" >
+            <mvc:form modelAttribute="orders" action="payment" method="post" style="width: 100%;" >
 
                 <div class="row">
 
@@ -110,21 +110,22 @@
                             <div class="row">
                                 <div class="col-lg-12">
 
-                                    <mvc:input onblur="this.placeholder = 'Full name*'" type="text" placeholder="Full name*" path="fullName" required="true" />
+                                    <mvc:input class="single-input" onblur="this.placeholder = 'Full name*'" type="text" placeholder="Full name*" path="fullName" required="true" />
 
                                 </div>
 
                                 <div class="col-lg-6">
-                                    <mvc:input placeholder="Phone number*" onfocus="this.placeholder = ''" type="text" onblur="this.placeholder = 'Phone number*'" path="phoneNumber" required="true" />
+                                    <mvc:input value="${users.phoneNumber}" class="single-input" placeholder="Phone number*" onfocus="this.placeholder = ''" type="text" onblur="this.placeholder = 'Phone number*'" path="phoneNumber" required="true" />
 
                                 </div>
+                                    
                                 <div class="col-lg-6">
-                                    <mvc:input type="email" placeholder="Email Address*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address*'" path="email" required="true" />
+                                    <mvc:input value="${users.email}" class="single-input" type="email" placeholder="Email Address*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address*'" path="email" required="true" />
 
                                 </div>
 
                                 <div class="col-lg-12">
-                                    <mvc:input type="text" placeholder="Address line 01*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address line 01*'" path="address" required="true" />
+                                    <mvc:input class="single-input" type="text"  placeholder="Address line 01*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address line 01*'" path="address" required="true" />
 
                                 </div>
                                     
@@ -132,9 +133,9 @@
                             </div>
                         
                         
-                        <h3 class="billing-title mt-20 mb-10">Billing Details</h3>
+                        <h3 class="billing-title mt-20 mb-10">Description</h3>
                         
-                        <textarea placeholder="Order Notes"  name="orders.description" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Order Notes'" required class="common-textarea"></textarea>
+                        <mvc:input type="text" class="single-textarea" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Order Notes'" path="description"  />
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="order-wrapper mt-50">
@@ -178,24 +179,7 @@
                                                       value="${totalCartShip}"
                                                       currencySymbol="VND"/></div>
                                 </div>
-                                <div class="d-flex align-items-center mt-10">
-                                    <input class="pixel-radio" type="radio" id="check" name="brand">
-                                    <label for="check" class="bold-lable">Cash On Delivery</label>
-                                </div>
-                                <p class="payment-info">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <input class="pixel-radio" type="radio" id="paypal" name="brand">
-                                        <label for="paypal" class="bold-lable">Bank</label>
-                                    </div>
-                                    <img src="img/organic-food/pm.jpg" alt="" class="img-fluid">
-                                </div>
-                                <p class="payment-info">Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                                <div class="mt-20 d-flex align-items-start">
-                                    <input type="checkbox" class="pixel-checkbox" id="login-4">
-                                    <label for="login-4">I’ve read and accept the <a href="#" class="terms-link">terms & conditions*</a></label>
-                                </div>
-                                <input class="view-btn color-2 w-100 mt-20" type="submit" value="Order Now">
+                                <input class="view-btn color-2 w-100 mt-20" type="submit" value="Continue">
                             </div>
                         </div>
 

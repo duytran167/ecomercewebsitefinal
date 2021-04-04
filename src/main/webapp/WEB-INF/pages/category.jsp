@@ -3,7 +3,7 @@
     Created on : Feb 25, 2021, 10:00:09 AM
     Author     : PC
 --%>
-<%@ taglib prefix="tag" uri="/WEB-INF/taglibs/customTaglib.tld" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -91,6 +91,7 @@
                                     <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 single-product">
                                         <div class="content">
                                             <div class="content-overlay"></div>
+                                            
 
                                             <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l8.jpg"/>" alt="">
                                             <div class="content-details fadeIn-bottom">
@@ -115,12 +116,12 @@
                                 </c:forEach>
                             </c:if> 
                             <c:if test="${product == null || fn:length(product)<=0}">
-                            <tr>
-                                <td style="color: red" colspan="7">
-                                    Not Found !!!
-                                </td>
-                            </tr>
-                        </c:if>
+                                <tr>
+                                    <td style="color: red" colspan="7">
+                                        Not Found !!!
+                                    </td>
+                                </tr>
+                            </c:if>
 
                         </div>
                     </section>

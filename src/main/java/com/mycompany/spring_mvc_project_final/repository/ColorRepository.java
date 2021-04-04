@@ -17,6 +17,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ColorRepository
         extends CrudRepository<ColorEntity, Integer> {
-    ColorEntity findById(int id);
+    ColorEntity findById(int color);
     
 }

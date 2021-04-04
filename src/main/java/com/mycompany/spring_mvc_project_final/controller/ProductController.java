@@ -6,6 +6,7 @@
 package com.mycompany.spring_mvc_project_final.controller;
 
 import com.mycompany.spring_mvc_project_final.entities.ProductEntity;
+import com.mycompany.spring_mvc_project_final.repository.ProductRepository;
 import com.mycompany.spring_mvc_project_final.service.CategoryService;
 import com.mycompany.spring_mvc_project_final.service.ColorService;
 import com.mycompany.spring_mvc_project_final.service.ProductDetailService;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -36,6 +38,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ProductController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ProductRepository productRepository;
 
     
     @Autowired
@@ -64,9 +68,8 @@ public class ProductController {
     
     // detail product
     @RequestMapping(value ="/detail/{id}", method = RequestMethod.GET)
-    public String detail(Model model,
-            @PathVariable("id") int id) {        
-        model.addAttribute("product", productService.findProductById(id));
+    public String detail( @PathVariable("id")int id, Model model) {        
+        model.addAttribute("product", productRepository.findById(id));
         model.addAttribute("categories",
                 categoryService.getCategories());
         model.addAttribute("color", productService.getListColorDetails(id));

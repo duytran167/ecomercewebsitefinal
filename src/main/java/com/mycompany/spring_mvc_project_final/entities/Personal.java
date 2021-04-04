@@ -6,6 +6,7 @@
 package com.mycompany.spring_mvc_project_final.entities;
 
 import com.mycompany.spring_mvc_project_final.enums.Gender;
+import jakarta.validation.constraints.NotBlank;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
@@ -13,8 +14,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-import javax.validation.constraints.NotBlank;
+
 import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 

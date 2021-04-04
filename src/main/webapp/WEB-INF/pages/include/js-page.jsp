@@ -12,6 +12,7 @@
 <script src="<c:url value="/resources/js/parallax.min.js"/>"></script>
 <script src="<c:url value="/resources/js/nouislider.min.js"/>"></script>
 <script src="<c:url value="/resources/js/slick.min.js"/>"></script>
+<script src="<c:url value="/resources/js/popper.min.js"/>"></script>
 
 
 

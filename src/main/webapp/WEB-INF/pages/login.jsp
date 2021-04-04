@@ -4,7 +4,10 @@
     Author     : AnhLe
 --%>
 
+<%@ taglib uri="http://www.springframework.org/tags/form"
+           prefix="mvc" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -53,36 +56,22 @@
                     <div class="login-form">
                         <h3 class="billing-title text-center">Login</h3>
                         <!-- /login?error=true -->
-                        <c:if test="${message != null && message != ''}">
-                            <p style="color: red">${message}</p>
-                        </c:if>
+                        
                         <p class="text-center mt-80 mb-40">Welcome back! Sign in to your account </p>
-                        <form action="<c:url value="j_spring_security_check"/>" method="post">
-                            <input name="username" type="email" placeholder="Username or Email*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username or Email*'" required class="common-input mt-20">
-                            <input name="password" type="password" placeholder="Password*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password*'" required class="common-input mt-20">
-                            <button type="submit" value="login" class="view-btn color-2 mt-20 w-100"><span>Login</span></button>
+                        <form action="login" method="POST">
+                            <p style="color: red;"> ${erroMesseger}</p>
+                            <input name="email" type="email" placeholder="Username or Email*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email*'" required class="common-input mt-20">
+                            <input name="noopPassword" type="password" placeholder="Password*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password*'" required class="common-input mt-20">
+                            <input type="submit" name="signin" id="signin"  value="Log in" class="view-btn color-2 mt-20 w-100"/>
                             <div class="mt-20 d-flex align-items-center justify-content-between">
                                 <div class="d-flex align-items-center"><input type="checkbox" class="pixel-checkbox" id="login-1"><label for="login-1">Remember me</label></div>
                                 <a href="#">Lost your password?</a>
                             </div>
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            
                         </form>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="register-form">
-                        <h3 class="billing-title text-center">Register</h3>
-                        <p class="text-center mt-40 mb-30">Create your very own account </p>
-                        <form action="#">
-                            <input type="text" placeholder="Full name*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Full name*'" required class="common-input mt-20">
-                            <input type="email" placeholder="Email address*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address*'" required class="common-input mt-20">
-                            <input type="text" placeholder="Phone number*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone number*'" required class="common-input mt-20">
-                            <input type="text" placeholder="Username*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username*'" required class="common-input mt-20">
-                            <input type="password" placeholder="Password*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password*'" required class="common-input mt-20">
-                            <button class="view-btn color-2 mt-20 w-100"><span>Register</span></button>
-                        </form>
-                    </div>
-                </div>
+                
             </div>
         </div>
         <!-- End My Account -->

@@ -9,43 +9,22 @@
                 <ul class="list">
                     <li><a href="tel:+12312-3-1209">+12312-3-1209</a></li>
                     <li><a href="mailto:support@colorlib.com">support@colorlib.com</a></li>
-                    <li><a>Hello : <span>${message}</span></a></li>
+                    
                 </ul>
                 <ul class="list">
-                    <li><a href="<c:url value="/admin/home"/>">login</a></li>
-                    <li><a href="<c:url value="/logout"/>">logout</a></li>
-<!--                    <li>
-                        <div class="cart">
-                            <a href="#" > CART</a>
-                            <span> <c:out value="${sessionScope.myCartNum}"/></span>
-                        </div>
-                        <ul class="sub-icon1 list">
-                            <h3>Recently added items (<c:out value="${sessionScope.myCartNum}"/>)</h3>
-                            <div class="shopping_cart">
-                                <c:forEach var="map" items="${sessionScope.myCartItems}">
-                                    <div class="cart_box">
-                                        <div class="message">
-                                            <div class="alert-close"> </div> 
-                                            <div class="list_img"><img src="${pageContext.request.contextPath}/resources/pages/images/14.jpg" class="img-responsive" alt=""></div>
-                                            <div class="list_desc"><h4><a href="#"><c:out value="${map.value.product.name}"/></a></h4><c:out value="${map.value.quantity}"/> x
-                                                $<c:out value="${map.value.product.price}"/> = <span class="actual"> $<c:out value="${map.value.quantity * map.value.product.productPrice}"/></span></div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </c:forEach>
+                    <% if (session.getAttribute("users") != null) { %>
+                            <div class="user_box ml-auto">
+                                <li> <div class="user_box_login user_box_link"><a href="${pageContext.request.contextPath}/account/${users.id}">${users.username}</a></div></li>
+                                <li>  <div class="user_box_register user_box_link"><a href="<c:url value="/logout" />">logout</a></li>
                             </div>
-                            <div class="total">
-                                <div class="total_left">Total: </div>
-                                <div class="total_right">$<c:out value="${sessionScope.myCartTotal}"/></div>
-                                <div class="clearfix"> </div>
+                            <% } else { %>
+                            <div class="user_box ml-auto">
+                                <li><div class="user_box_login user_box_link"><a href="${pageContext.request.contextPath}/login">login</a></div></li>
+                               <li> <div class="user_box_register user_box_link"><a href="${pageContext.request.contextPath}/register/register_log">register</a></div></li>
                             </div>
-                            <div class="login_buttons">
-                                <div class="check_button"><a href="checkout.html">Check out</a></div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </ul>
-                    </li>-->
+                            <% }%>
+                   
+
 
                 </ul>
             </div>

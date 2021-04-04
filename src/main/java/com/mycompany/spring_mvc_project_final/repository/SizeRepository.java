@@ -18,5 +18,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SizeRepository
         extends CrudRepository<SizeEntity, Integer> {
-    SizeEntity findById(int id);
+    SizeEntity findById(int size);
 }

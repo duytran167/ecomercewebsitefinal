@@ -34,14 +34,14 @@ public class OrderService {
        orderRepository.save(orderEntity);
     }
     
-    public OrderEntity findOrderById(int id) {
-        Optional<OrderEntity> optional = orderRepository.findById(id);
-        if (optional.isPresent()) {
-            return optional.get();
-        } else {
-            return new OrderEntity();
-        }
-    }
+//    public OrderEntity findOrderById(int id) {
+//        Optional<OrderEntity> optional = orderRepository.findById(id);
+//        if (optional.isPresent()) {
+//            return optional.get();
+//        } else {
+//            return new OrderEntity();
+//        }
+//    }
     
     
     

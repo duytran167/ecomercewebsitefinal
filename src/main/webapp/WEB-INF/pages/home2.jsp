@@ -62,7 +62,7 @@
                             <div class="col-lg-3 col-md-6 single-product">
                                 <div class="content">
                                     <div class="content-overlay"></div>
-                                    <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l1.jpg"/>" alt="">
+                                    <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l8.jpg"/>" alt="">
                                     <div class="content-details fadeIn-bottom">
                                         <div class="bottom d-flex align-items-center justify-content-center">
                                             <a href="#"><span class="lnr lnr-heart"></span></a>
@@ -101,7 +101,7 @@
                             <div class="col-lg-3 col-md-6 single-product">
                                 <div class="content">
                                     <div class="content-overlay"></div>
-                                    <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l1.jpg"/>" alt="">
+                                    <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l8.jpg"/>" alt="">
                                     <div class="content-details fadeIn-bottom">
                                         <div class="bottom d-flex align-items-center justify-content-center">
                                             <a href="#"><span class="lnr lnr-heart"></span></a>

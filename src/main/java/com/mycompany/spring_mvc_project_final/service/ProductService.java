@@ -37,17 +37,17 @@ public class ProductService{
        productRepository.save(productEntity);
     }
     
-    public ProductEntity findProductById(int id) {
-        Optional<ProductEntity> optional = productRepository.findById(id);
-        if (optional.isPresent()) {
-            return optional.get();
-        } else {
-            return new ProductEntity();
-        }
-    }
+//    public ProductEntity findProductById(int id) {
+//        Optional<ProductEntity> optional = productRepository.findById(id);
+//        if (optional.isPresent()) {
+//            return optional.get();
+//        } else {
+//            return new ProductEntity();
+//        }
+//    }
     public List<ColorEntity> getListColorDetails (int id) {
         List<ColorEntity> list = new ArrayList<>();
-        ProductEntity a = findProductById(id);
+        ProductEntity a = productRepository.findById(id);
         for(ProductDetailEntity product : a.getProduct_detail()) {
             
           list.add(product.getColor());
@@ -57,7 +57,7 @@ public class ProductService{
     }
     public List<SizeEntity> getListSizeDetails (int id) {
         List<SizeEntity> list = new ArrayList<>();
-        ProductEntity a = findProductById(id);
+         ProductEntity a = productRepository.findById(id);
         for(ProductDetailEntity product : a.getProduct_detail()) {
             
           list.add(product.getSize());

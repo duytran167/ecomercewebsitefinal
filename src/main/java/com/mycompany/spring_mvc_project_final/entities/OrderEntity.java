@@ -45,12 +45,12 @@ public class OrderEntity extends Personal{
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate orderDate;
     
-    @Column(name = "totalPrice")
+    @Column(name = "totalPrice") 
     private double totalPrice;
     
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private OrderStatus status = OrderStatus.SHOPPING_CART;
+    private OrderStatus status = OrderStatus.PENDING;
     
     private String description;
     
@@ -91,7 +91,26 @@ public class OrderEntity extends Personal{
         this.status = status;
     }
 
+    //1-n voi bang user
+    @ManyToOne
+    @JoinColumn(name = "UserID")
+    private UserEntity users;
+
+    public UserEntity getUsers() {
+        return users;
+    }
+
+    public void setUsers(UserEntity users) {
+        this.users = users;
+    }
+
     
+
+   
+    
+    
+
+    // 1-n voi bang order detail
     @OneToMany(mappedBy = "orders", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     private Set<OrderDetailEntity> orderDetailsList;
@@ -111,33 +130,36 @@ public class OrderEntity extends Personal{
     public void setOrderDetailsList(Set<OrderDetailEntity> orderDetailsList) {
         this.orderDetailsList = orderDetailsList;
     }
-
-    
-    
-
-    
-    
-    
-    
-    
-     
-
-    
-
-    
-     
     
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    @JoinColumn(name = "CreditCardID")//khóa ngoại 
+    private CreditCardEntity creditCard;
 
-    public UserEntity getUser() {
-        return user;
+    public CreditCardEntity getCreditCard() {
+        return creditCard;
     }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setCreditCard(CreditCardEntity creditCard) {
+        this.creditCard = creditCard;
     }
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+     
+
+    
+
+    
+     
+    
+    
     
     
     

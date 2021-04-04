@@ -21,7 +21,7 @@ public interface ProductRepository extends CrudRepository<ProductEntity, Integer
     
     
     
-    
+    ProductEntity findById(int id);
     ProductEntity findByName(String name);
     ProductEntity deleteById(int id);
     

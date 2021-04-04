@@ -11,7 +11,7 @@ import com.mycompany.spring_mvc_project_final.entities.ProductDetailEntity;
 import com.mycompany.spring_mvc_project_final.entities.ProductEntity;
 import com.mycompany.spring_mvc_project_final.entities.SizeEntity;
 import com.mycompany.spring_mvc_project_final.entities.UserEntity;
-import com.mycompany.spring_mvc_project_final.enums.ProductStatus;
+
 import com.mycompany.spring_mvc_project_final.repository.ProductRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,11 +34,11 @@ public class CartEntity {
     ProductDetailEntity productDetail;
     ProductRepository productRepository;
     CartEntity cart;
+    UserEntity user;
 
     public CartEntity() {
         orderDetailsList = new ArrayList<>();
     }
-
     public int getOrder() {
         return order;
     }
@@ -46,6 +46,15 @@ public class CartEntity {
     public void setOrder(int order) {
         this.order = order;
     }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+    
 
     public List<OrderDetailEntity> getOrderDetailsList() {
         return orderDetailsList;
@@ -97,6 +106,7 @@ public class CartEntity {
 
     //Add Item
     public void addItem(ProductEntity product) {
+        //, ColorEntity color_pro, SizeEntity size_pro
         boolean t = false;
         for (int i = 0; i < orderDetailsList.size(); i++) {
             if (orderDetailsList.get(i).getProduct().getId() == product.getId()) {
@@ -122,6 +132,16 @@ public class CartEntity {
                 orderDetailsList.remove(i);
             }
         }
+    }
+    //Total Amount
+    public double getTotal() {
+        double sum = 0;
+        for (int i = 0; i < orderDetailsList.size(); i++) {
+                double price = orderDetailsList.get(i).getProduct().getPrice();
+                int quantity = orderDetailsList.get(i).getQuantity();
+                sum = (price * quantity) + 30000;
+        }
+        return sum;
     }
 
 }

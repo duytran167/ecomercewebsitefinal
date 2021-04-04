@@ -7,7 +7,9 @@ package com.mycompany.spring_mvc_project_final.entities;
 
 import com.mycompany.spring_mvc_project_final.enums.CreditCardStatus;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +21,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,99 +37,113 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class CreditCardEntity implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
-    
-    @Column(length = 50)
-    private String name;
-    
-    @Temporal(TemporalType.DATE)
-    @Column(name = "expDate")
+    @Column(name = "CreditCardID")
+    private int id;
+
+    @Column(name = "CreditCardType")
+    private String creditCardType;
+
+    @Column(name = "CreditCardNumber")
+    private String creditCardNumber;
+
+    @Column(name = "CardholdersName")
+    private String cardholdersName;
+
+    @Column(name = "ExpirationDate")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date expDate;
-    
-    @Column(length = 3)
-    private String cvcCode;
-    
-    @Column(name = "balance")
-    private double balance;
-    
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private CreditCardStatus status;
-    
-    
+    private LocalDate expirationDate;
+
+    @Column(name = "Surplus")
+    private Double surplus;
+
+    @Column(name = "CVV")
+    private String cvv;
+
+    @OneToOne()
+    @PrimaryKeyJoinColumn
+    private UserEntity users;//(1) 
+
+    //Setup relationshipss with Payment
+    @OneToMany(mappedBy = "creditCard", fetch = FetchType.LAZY)
+    List<OrderEntity> OrderList;
 
     public CreditCardEntity() {
     }
+    
+    
 
     public int getId() {
-        return Id;
+        return id;
     }
 
-    public void setId(int Id) {
-        this.Id = Id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCreditCardType() {
+        return creditCardType;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCreditCardType(String creditCardType) {
+        this.creditCardType = creditCardType;
     }
 
-    public Date getExpDate() {
-        return expDate;
+    public String getCreditCardNumber() {
+        return creditCardNumber;
     }
 
-    public void setExpDate(Date expDate) {
-        this.expDate = expDate;
+    public void setCreditCardNumber(String creditCardNumber) {
+        this.creditCardNumber = creditCardNumber;
     }
 
-    public String getCvcCode() {
-        return cvcCode;
+    public String getCardholdersName() {
+        return cardholdersName;
     }
 
-    public void setCvcCode(String cvcCode) {
-        this.cvcCode = cvcCode;
+    public void setCardholdersName(String cardholdersName) {
+        this.cardholdersName = cardholdersName;
     }
 
-    public double getBalance() {
-        return balance;
+    public LocalDate getExpirationDate() {
+        return expirationDate;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
-    public CreditCardStatus getStatus() {
-        return status;
+    public Double getSurplus() {
+        return surplus;
     }
 
-    public void setStatus(CreditCardStatus status) {
-        this.status = status;
+    public void setSurplus(Double surplus) {
+        this.surplus = surplus;
     }
+
+    public String getCvv() {
+        return cvv;
+    }
+
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
+    }
+
+    public UserEntity getUsers() {
+        return users;
+    }
+
+    public void setUsers(UserEntity users) {
+        this.users = users;
+    }
+
     
-//    @OneToMany(mappedBy = "creditcard", fetch = FetchType.LAZY,
-//            cascade = CascadeType.ALL)
-//    private Set<PaymentEntity> payment;
-//
-//    public Set<PaymentEntity> getPayment() {
-//        return payment;
-//    }
-//
-//    public void setPayment(Set<PaymentEntity> payment) {
-//        this.payment = payment;
-//    }
 
+    public List<OrderEntity> getOrderList() {
+        return OrderList;
+    }
 
-    
-    
-    
-    
-   
-    
-    
-    
+    public void setOrderList(List<OrderEntity> OrderList) {
+        this.OrderList = OrderList;
+    }
+ 
 }

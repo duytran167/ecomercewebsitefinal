@@ -37,6 +37,9 @@ public class OrderDetailEntity {
      
      @Column(name="quantity")
      private int quantity;
+     
+     @Column(name = "paymentMethod")
+    private String paymentMethod;
 
     public OrderDetailEntity() {
     }
@@ -110,5 +113,14 @@ public class OrderDetailEntity {
         return  getQuantity() * product.getPrice();
     }
 
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+     
      
 }
