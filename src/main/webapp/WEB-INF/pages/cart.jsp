@@ -24,7 +24,7 @@
         <!-- Site Title -->
         <title>Shop</title>
 
-        
+
         <jsp:include page="include/css-page.jsp" />
     </head>
     <body>
@@ -142,47 +142,52 @@
             </div>
             <div class="shipping-area d-flex justify-content-end">
                 <div class="tile text-uppercase">Shipping:</div>
-                <ul class="d-flex flex-column align-items-end">
-                    <label for="local-delivery"><span>${ship}</span></label>
-                </ul>
-                
-                <% if (session.getAttribute("users") != null) { %>
-                <td colspan="4">
-                    <form action="${pageContext.request.contextPath}/order/checkout" method="get">
-                        <input type="hidden" name="action" value="continue">
-                        <input class="view-btn color-2 mt-10" type="submit" value="continue">
+                <div class="d-inline-flex flex-column align-items-end">
+
+                    <ul class="d-flex flex-column align-items-end">
+                        <label for="local-delivery"><span>${ship}</span></label>
+                    </ul>
+
+                    <% if (session.getAttribute("users") != null) { %>
+                    <td colspan="4">
+
+                        <form action="${pageContext.request.contextPath}/order/checkout" method="get">
+                        
+                        <input class="view-btn color-2 mt-10" type="submit" value="checkout">
+                        
                     </form>
-                </td> 
-                <% } else { %>
-                <td colspan="4">
-                    <div class=" view-btn color-2 mt-10" data-toggle="modal" data-target="#myModal"><a>Continue</a></div>
-                </td>
-                <div class="modal" id="myModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <h3 style="text-align: center;">Please
-                                    <a href="${pageContext.request.contextPath}/login">Login</a> or 
-                                    <a href="${pageContext.request.contextPath}/register/register_log">Register</a> to get more offers!
-                                </h3>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </td> 
+                    <% } else { %>
+                    <td colspan="4">
+                        <div class=" view-btn color-2 mt-10" data-toggle="modal" data-target="#myModal"><a>Checkout</a></div>
+                    </td>
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <h3 style="text-align: center;">Please
+                                        <a href="${pageContext.request.contextPath}/login">Login</a> or 
+                                        <a href="${pageContext.request.contextPath}/register/register_log">Register</a> to get more offers!
+                                    </h3>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <% }%>
+                    <% }%>
 
 
             </div>
-        </div>
+            </div>
+    </div>
 
-        <!-- Start Most Search Product Area -->
+    <!-- Start Most Search Product Area -->
 
-        <jsp:include page="include/footer.jsp"/>
-        <jsp:include page="include/js-page.jsp"/>  
+    <jsp:include page="include/footer.jsp"/>
+    <jsp:include page="include/js-page.jsp"/>  
 
 
-    </body>
+</body>
 </html>

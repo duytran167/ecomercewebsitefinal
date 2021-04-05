@@ -158,7 +158,7 @@ public class OrderController {
     public String checkout(UserEntity user, Model model) {
         model.addAttribute("cart", cart.getOrderDetailList());
         model.addAttribute("user", new UserEntity());
-        model.addAttribute("orders", new OrderEntity()); //model.addAttribute ben modelAttribute ben checkout.jsp
+//        model.addAttribute("orders", new OrderEntity()); //model.addAttribute ben modelAttribute ben checkout.jsp
 //        model.addAttribute("orderDetails", new OrderDetailEntity());
         return "checkout"; //Return Checkout.jsp
     }

@@ -99,7 +99,7 @@
                                                     <a href="#"><span class="lnr lnr-heart"></span></a>
                                                     <a href="#"><span class="lnr lnr-layers"></span></a>
                                                     <a href="${pageContext.request.contextPath}/order/addToCart/${product.id}"><span class="lnr lnr-cart"></span></a>
-                                                    <a href="<c:url value="/product/detail/${product.id}"/>"  data-toggle="modal" data-target="#exampleModal"><span class="lnr lnr-frame-expand"></span></a>
+                                                    <a href="<c:url value="/product/detail/${product.id}"/>"><span class="lnr lnr-frame-expand"></span></a>
                                                 </div>
                                             </div>
                                         </div>
