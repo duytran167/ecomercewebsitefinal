@@ -155,20 +155,19 @@ public class OrderController {
 
     //Checkout
     @RequestMapping(value = "/checkout", method = RequestMethod.GET)
-    public String checkout(Model model) {
-
+    public String checkout(UserEntity user, Model model) {
         model.addAttribute("cart", cart.getOrderDetailList());
-
+        model.addAttribute("user", new UserEntity());
         model.addAttribute("orders", new OrderEntity()); //model.addAttribute ben modelAttribute ben checkout.jsp
-        model.addAttribute("orderDetails", new OrderDetailEntity());
+//        model.addAttribute("orderDetails", new OrderDetailEntity());
         return "checkout"; //Return Checkout.jsp
     }
 
     @RequestMapping(value = "/payment", method = RequestMethod.POST)
-    public String payment(UserEntity user, Model model) {
+    public String payment(UserEntity user,OrderEntity orders, Model model) {
+        model.addAttribute("cart", cart.getOrderDetailList());
         model.addAttribute("creditCart", new CreditCardEntity());
-
-        model.addAttribute("cart", cart);
+        model.addAttribute("user", new UserEntity());
         return "payment";
     }
 

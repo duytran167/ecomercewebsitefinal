@@ -34,7 +34,7 @@ public class CartEntity {
     ProductDetailEntity productDetail;
     ProductRepository productRepository;
     CartEntity cart;
-    UserEntity user;
+    private UserEntity user;
 
     public CartEntity() {
         orderDetailsList = new ArrayList<>();

@@ -100,18 +100,15 @@
         <!-- End Checkout Area -->
         <!-- Start Billing Details Form -->
         <div class="container">
-            <mvc:form modelAttribute="orders" action="payment" method="post" style="width: 100%;" >
-
+            <mvc:form modelAttribute="user" action="payment" method="post" style="width: 100%;" >
                 <div class="row">
-
                     <div class="col-lg-8 col-md-6">
                         <h3 class="billing-title mt-20 mb-10">Billing Details</h3>
                         
                             <div class="row">
                                 <div class="col-lg-12">
 
-                                    <mvc:input class="single-input" onblur="this.placeholder = 'Full name*'" type="text" placeholder="Full name*" path="fullName" required="true" />
-
+                                    <mvc:input value="${users.fullName}" class="single-input" onblur="this.placeholder = 'Full name*'" type="text" placeholder="Full name*" path="fullName" required="true" />
                                 </div>
 
                                 <div class="col-lg-6">
@@ -128,12 +125,8 @@
                                     <mvc:input class="single-input" type="text"  placeholder="Address line 01*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address line 01*'" path="address" required="true" />
 
                                 </div>
-                                    
-
                             </div>
-                        
-                        
-                        <h3 class="billing-title mt-20 mb-10">Description</h3>
+                                    <h3 class="billing-title mt-20 mb-10">Description</h3>
                         
                         <mvc:input type="text" class="single-textarea" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Order Notes'" path="description"  />
                     </div>
@@ -141,11 +134,13 @@
                         <div class="order-wrapper mt-50">
                             <h3 class="billing-title mb-10">Your Order</h3>
                             <div class="order-list">
-                                <c:set var="totalCart" value="0"></c:set>
-                                <c:forEach var="cart" items="${cart}">
-                                    <c:set var="totalCart" value="${totalCart + cart.totalAmount}"></c:set>
-                                    <c:set var="totalShip" value="30000"></c:set>
-                                    <c:set var="totalCartShip" value="${totalCart + totalShip}"></c:set>
+                                <c:set var="total" value="${0}" ></c:set>
+                                <c:set var="totalCart" value="${0}"></c:set>
+                                <c:forEach var="cart" items="${cart}" begin="0" end="0">
+                                    <c:set var="total" value="${cart.quantity * cart.product.price}"></c:set>
+                                    <c:set var="ship" value="30000"></c:set>
+                                    <c:set var="totalCart" value="${totalCart + total }"></c:set>
+                                    <c:set var="totalCartShip" value="${totalCart + total + ship}"></c:set>
                                         <div class="list-row d-flex justify-content-between">
                                             <div><h6>Product</h6></div>
                                             <div><h6>Price</h6></div>
@@ -156,7 +151,7 @@
                                             <div>${cart.product.name}</div>
                                         <div>${cart.quantity}</div>
                                         <div><fmt:formatNumber type="currency"
-                                                          value="${cart.totalAmount}"
+                                                          value="${total}"
                                                           currencySymbol="VND"/></div>
                                     </div>
                                 </c:forEach>
@@ -170,7 +165,7 @@
                                 <div class="list-row d-flex justify-content-between">
                                     <h6>Shipping</h6>
                                     <div> <fmt:formatNumber type="currency"
-                                                      value="${totalShip}"
+                                                      value="${ship}"
                                                       currencySymbol="VND"/></div>
                                 </div>
                                 <div class="list-row d-flex justify-content-between">
