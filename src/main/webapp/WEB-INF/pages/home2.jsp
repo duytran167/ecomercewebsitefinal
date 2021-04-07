@@ -88,7 +88,7 @@
         </section>
 
         <!-- Start women-product Area -->
-        <section class="women-product-area section-gap" id="women">
+        <section class="women-product-area section-gap" id="best">
             <div class="container">
                 <div class="countdown-content pb-40">
                     <div class="title text-center">

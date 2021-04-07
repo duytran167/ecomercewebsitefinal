@@ -112,17 +112,20 @@ public class ProductEntity implements Serializable {
         this.category = category;
     }
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
-    private Set<OrderDetailEntity> order_detail;
+    private Set<ProductDetailEntity> product_detail;
 
-    public Set<OrderDetailEntity> getOrder_detail() {
-        return order_detail;
+    public Set<ProductDetailEntity> getProduct_detail() {
+        return product_detail;
     }
 
-    public void setOrder_detail(Set<OrderDetailEntity> order_detail) {
-        this.order_detail = order_detail;
+    public void setProduct_detail(Set<ProductDetailEntity> product_detail) {
+        this.product_detail = product_detail;
     }
+    
+    
+    
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
@@ -148,10 +151,7 @@ public class ProductEntity implements Serializable {
         this.promotion = promotion;
     }
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
-    private Set<ProductDetailEntity> product_detail;
-
+    
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -160,13 +160,7 @@ public class ProductEntity implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public Set<ProductDetailEntity> getProduct_detail() {
-        return product_detail;
-    }
-
-    public void setProduct_detail(Set<ProductDetailEntity> product_detail) {
-        this.product_detail = product_detail;
-    }
+    
 
     
 }

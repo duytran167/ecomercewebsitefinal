@@ -83,6 +83,11 @@
                             </div>
                             <div class="form-group">
                                 
+                                    <mvc:input name="address" class="common-input mt-20" type="text"   path="address" id="address" placeholder="Address*" cssErrorClass="formFieldError" />
+                                    <mvc:errors path="address" />
+                            </div>
+                            <div class="form-group">
+                                
                                     <mvc:input name="phoneNumber" class="common-input mt-20" type="text"   path="phoneNumber" id="phoneNumber" placeholder="Phone Number*" cssErrorClass="formFieldError" />
                                     <mvc:errors path="phoneNumber" />
                             </div>

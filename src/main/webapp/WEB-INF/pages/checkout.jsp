@@ -100,7 +100,7 @@
         <!-- End Checkout Area -->
         <!-- Start Billing Details Form -->
         <div class="container">
-            <mvc:form modelAttribute="user" action="payment" method="post" style="width: 100%;" >
+            <mvc:form modelAttribute="orders" action="payment" method="post" style="width: 100%;" >
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
                         <h3 class="billing-title mt-20 mb-10">Billing Details</h3>
@@ -136,11 +136,11 @@
                             <div class="order-list">
                                 <c:set var="total" value="${0}" ></c:set>
                                 <c:set var="totalCart" value="${0}"></c:set>
-                                <c:forEach var="cart" items="${cart}" begin="0" end="0">
+                                <c:forEach var="cart" items="${cart}" >
                                     <c:set var="total" value="${cart.quantity * cart.product.price}"></c:set>
                                     <c:set var="ship" value="30000"></c:set>
                                     <c:set var="totalCart" value="${totalCart + total }"></c:set>
-                                    <c:set var="totalCartShip" value="${totalCart + total + ship}"></c:set>
+                                    <c:set var="totalCartShip" value="${totalCart + ship}"></c:set>
                                         <div class="list-row d-flex justify-content-between">
                                             <div><h6>Product</h6></div>
                                             <div><h6>Price</h6></div>

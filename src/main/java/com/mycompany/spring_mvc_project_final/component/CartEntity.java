@@ -105,11 +105,11 @@ public class CartEntity {
     }
 
     //Add Item
-    public void addItem(ProductEntity product) {
+    public void addItem(ProductEntity product, ProductDetailEntity product_Detail) {
         //, ColorEntity color_pro, SizeEntity size_pro
         boolean t = false;
         for (int i = 0; i < orderDetailsList.size(); i++) {
-            if (orderDetailsList.get(i).getProduct().getId() == product.getId()) {
+            if (orderDetailsList.get(i).getProduct_Detail().getProduct().getId() == product.getId()) {
                 OrderDetailEntity orderDetails = orderDetailsList.get(i);
                 orderDetails.setQuantity(orderDetails.getQuantity() + 1);
                 orderDetailsList.set(i, orderDetails);
@@ -118,9 +118,10 @@ public class CartEntity {
         }
         if (!t) {
             OrderDetailEntity orderDetails = new OrderDetailEntity();
-            orderDetails.setProduct(product);
+            
+            orderDetails.getProduct_Detail().getProduct();
             orderDetails.setQuantity(1);
-            orderDetails.getProduct().getPrice();
+            orderDetails.getPrice();
             orderDetailsList.add(orderDetails);
         }
     }
@@ -128,7 +129,7 @@ public class CartEntity {
     //Remove Item
     public void removeItem(ProductEntity product) {
         for (int i = 0; i < orderDetailsList.size(); i++) {
-            if (orderDetailsList.get(i).getProduct().getId() == product.getId()) {
+            if (orderDetailsList.get(i).getProduct_Detail().getProduct().getId() == product.getId()) {
                 orderDetailsList.remove(i);
             }
         }
@@ -137,9 +138,9 @@ public class CartEntity {
     public double getTotal() {
         double sum = 0;
         for (int i = 0; i < orderDetailsList.size(); i++) {
-                double price = orderDetailsList.get(i).getProduct().getPrice();
+                double price = orderDetailsList.get(i).getProduct_Detail().getProduct().getPrice();
                 int quantity = orderDetailsList.get(i).getQuantity();
-                sum = (price * quantity) + 30000;
+                sum = (price * quantity);
         }
         return sum;
     }

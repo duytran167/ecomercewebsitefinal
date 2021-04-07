@@ -6,6 +6,7 @@
 package com.mycompany.spring_mvc_project_final.service;
 
 import com.mycompany.spring_mvc_project_final.entities.ProductDetailEntity;
+import com.mycompany.spring_mvc_project_final.entities.ProductEntity;
 import com.mycompany.spring_mvc_project_final.repository.ProductDetailRepository;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,8 @@ public class ProductDetailService {
     @Autowired
     private ProductDetailRepository productDetailRepository;
     
-    
+    public List<ProductEntity> getProducts(){
+        return (List<ProductEntity>) productDetailRepository.findAll();
+    }
     
 }

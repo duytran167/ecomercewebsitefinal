@@ -5,6 +5,7 @@ import com.mycompany.spring_mvc_project_final.entities.ColorEntity;
 import com.mycompany.spring_mvc_project_final.entities.CreditCardEntity;
 import com.mycompany.spring_mvc_project_final.entities.OrderDetailEntity;
 import com.mycompany.spring_mvc_project_final.entities.OrderEntity;
+import com.mycompany.spring_mvc_project_final.entities.ProductDetailEntity;
 import com.mycompany.spring_mvc_project_final.entities.ProductEntity;
 import com.mycompany.spring_mvc_project_final.entities.SizeEntity;
 import com.mycompany.spring_mvc_project_final.entities.UserEntity;
@@ -103,9 +104,10 @@ public class OrderController {
         //@RequestParam(name = "colorId") int color,@RequestParam(name = "sizeId") int size,
         
         ProductEntity product = (ProductEntity) productRepository.findById(id);
+        ProductDetailEntity product_Detail = (ProductDetailEntity) productDetailRepository.findById(id);
         //ColorEntity color_pro = (ColorEntity) colorRepository.findById(color);
         //SizeEntity size_pro =(SizeEntity)sizeRepository.findById(size);
-        cart.addItem(product);
+        cart.addItem(product, product_Detail);
         //cart.addItem(product,color_pro,size_pro);
 
         model.addAttribute("cart", cart.getOrderDetailList());
@@ -142,7 +144,7 @@ public class OrderController {
             @RequestParam(name = "quantity") int quantity, ProductEntity product) {
         List<OrderDetailEntity> orderDetailsList = cart.getOrderDetailsList();
         for (int i = 0; i < orderDetailsList.size(); i++) {
-            if (orderDetailsList.get(i).getProduct().getId() == product.getId()) {
+            if (orderDetailsList.get(i).getProduct_Detail().getProduct().getId() == product.getId()) {
                 OrderDetailEntity orderDetail = orderDetailsList.get(i);
                 orderDetail.setQuantity(quantity);
                 orderDetailsList.set(i, orderDetail);
@@ -158,7 +160,7 @@ public class OrderController {
     public String checkout(UserEntity user, Model model) {
         model.addAttribute("cart", cart.getOrderDetailList());
         model.addAttribute("user", new UserEntity());
-//        model.addAttribute("orders", new OrderEntity()); //model.addAttribute ben modelAttribute ben checkout.jsp
+        model.addAttribute("orders", new OrderEntity()); //model.addAttribute ben modelAttribute ben checkout.jsp
 //        model.addAttribute("orderDetails", new OrderDetailEntity());
         return "checkout"; //Return Checkout.jsp
     }
@@ -167,7 +169,7 @@ public class OrderController {
     public String payment(UserEntity user,OrderEntity orders, Model model) {
         model.addAttribute("cart", cart.getOrderDetailList());
         model.addAttribute("creditCart", new CreditCardEntity());
-        model.addAttribute("user", new UserEntity());
+        model.addAttribute("user",user);
         return "payment";
     }
 
@@ -207,12 +209,12 @@ public class OrderController {
             for (OrderDetailEntity orderDetails : orderDetailsList) {
                 orderDetails.setOrders(newOrder);
                 //find product for order
-                int id = orderDetails.getProduct().getId();
+                int id = orderDetails.getProduct_Detail().getProduct().getId();
                 ProductEntity product = productRepository.findById(id);
                 double price = product.getPrice() * orderDetails.getQuantity();
                 orderDetails.setPrice(price);
-                //bookingDetails.setNumberOfPeople();
-                orderDetails.setProduct(product);
+                //
+                orderDetails.getProduct_Detail().setProduct(product);
                 //them color va size
                 orderDetails.setPaymentMethod("Payment at the Shopping Web");
                 SimpleMailMessage msg = new SimpleMailMessage();
@@ -220,9 +222,11 @@ public class OrderController {
                 msg.setSubject("Shopping Web");
                 msg.setText("Congratulations! You have successfully order."
                         + "\n Your Order Details "
-                        + "\n        Product Name: " + orderDetails.getProduct().getName()
+                        + "\n        Product Name: " + orderDetails.getProduct_Detail().getProduct().getName()
                         + "\n        Quantity: " + orderDetails.getQuantity()
                         + "\n        Price: " + orderDetails.getPrice()
+                        + "\n        Size: " + orderDetails.getProduct_Detail().getSize()
+                        + "\n        Color: " + orderDetails.getProduct_Detail().getColor()
                         + "\n Thanks for choosing us!");
                 javaMailSender.send(msg);
                 orderDetailsRepository.save(orderDetails);
@@ -230,7 +234,7 @@ public class OrderController {
 
             }
 
-            return "confimation";
+            return "confirmation";
         } else {
             LocalDate expiration = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(expirationDate));
             if (creditCard.getCardholdersName().equals(cardholdersName) && creditCard.getExpirationDate().equals(expirationDate)
@@ -260,7 +264,7 @@ public class OrderController {
                 order.setOrderDate(LocalDate.now());
 //                order.setStatus("Pending");
 
-//                order.setUsers(users);
+                order.setUsers(users);
 //                order.setCreditCard(user.getCreditCard());
                 OrderEntity newOrder = orderRepository.save(order);
 
@@ -269,24 +273,25 @@ public class OrderController {
                 for (OrderDetailEntity orderDetails : orderDetailsList) {
                     orderDetails.setOrders(newOrder);
                     //find pro for order
-                    int id = orderDetails.getProduct().getId();
+                    int id = orderDetails.getProduct_Detail().getProduct().getId();
                 ProductEntity product = productRepository.findById(id);
                 double price = product.getPrice() * orderDetails.getQuantity();
                 orderDetails.setPrice(price);
-                    //bookingDetails.setNumberOfPeople();
-                    orderDetails.setProduct(product);
-//                    orderDetails.setCheckInDate(cart.getCheckIn());
-//                    orderDetails.setCheckOutDate(cart.getCheckOut());
+                    //
+                    orderDetails.getProduct_Detail().setProduct(product);
+
                     orderDetails.setPaymentMethod("payment online");
                     SimpleMailMessage msg = new SimpleMailMessage();
                     msg.setTo(users.getEmail());
                     msg.setSubject("Shopping Web");
                     msg.setText("Congratulations! You have successfully order."
                             + "\n Your Order Details "
-                            + "\n        Product Name: " + orderDetails.getProduct().getName()
-                            + "\n        Quantity: " + orderDetails.getQuantity()
-                            + "\n        Price: " + orderDetails.getPrice()
-                            + "\n Thanks for choosing us!");
+                        + "\n        Product Name: " + orderDetails.getProduct_Detail().getProduct().getName()
+                        + "\n        Quantity: " + orderDetails.getQuantity()
+                        + "\n        Price: " + orderDetails.getPrice()
+                        + "\n        Size: " + orderDetails.getProduct_Detail().getSize()
+                        + "\n        Color: " + orderDetails.getProduct_Detail().getColor()
+                        + "\n Thanks for choosing us!");
                     javaMailSender.send(msg);
                     orderDetailsRepository.save(orderDetails);
                     cart.setOrderDetailsList(new ArrayList<OrderDetailEntity>());

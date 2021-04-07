@@ -55,23 +55,29 @@
                     <!-- Start Filter Bar -->
                     <div class="filter-bar d-flex flex-wrap align-items-center">
                         <a href="#" class="grid-btn active"><i class="fa fa-th" aria-hidden="true"></i></a>
-                        <a href="#" class="list-btn"><i class="fa fa-th-list" aria-hidden="true"></i></a>
+                        
                         <div class="sorting">
                             <select>
-                                <option value="1">All Product</option>
-                                <option value="1">Shirt</option>
-                                <option value="1">T-Shirt</option>
-                                <option value="1">Pants</option>
-                                <option value="1">Accessories</option>
+                                <c:catch var="product">
+                                    <option class="sort_btn" data-isotope-option='{ "sortBy": "original-order" }'><span></a></span></option>
+                                
+                                                                                    </c:catch>
+                                
                             </select>
                         </div>
-                        <div class="sorting mr-auto">
-                            <select>
-                                <option value="1">Show 12</option>
-                                <option value="1">Show 12</option>
-                                <option value="1">Show 12</option>
-                            </select>
+
+                        <div class="sorting">
+                            <form action="${pageContext.request.contextPath}/product/search"
+                                  method="get" class="form-inline float-right">
+                                <div class="form-group">
+                                    <input type="text" name="searchText"
+                                           class="btn genric-btn info-border search-input" placeholder="Search..." />
+                                    <input type="submit" value="Search"
+                                           class="btn genric-btn success radius" />
+                                </div>
+                            </form>
                         </div>
+
                         <div class="pagination">
                             <a href="#" class="prev-arrow"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
                             <a href="#" class="active">1</a>
@@ -91,7 +97,7 @@
                                     <div class="col-xl-4 col-lg-6 col-md-12 col-sm-6 single-product">
                                         <div class="content">
                                             <div class="content-overlay"></div>
-                                            
+
 
                                             <img class="content-image img-fluid d-block mx-auto" src="<c:url value="/resources/img/l8.jpg"/>" alt="">
                                             <div class="content-details fadeIn-bottom">

@@ -7,12 +7,16 @@ package com.mycompany.spring_mvc_project_final.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -74,12 +78,22 @@ public class ProductDetailEntity {
         this.quantity = quantity;
     }
 
-    
+    @OneToMany(mappedBy = "Product_Detail", fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
+    private Set<OrderDetailEntity> order_detail;
+
+    public Set<OrderDetailEntity> getOrder_detail() {
+        return order_detail;
+    }
+
+    public void setOrder_detail(Set<OrderDetailEntity> order_detail) {
+        this.order_detail = order_detail;
+    }
 
     
-
+    
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "productId")
     private ProductEntity product;
 
     public ProductEntity getProduct() {

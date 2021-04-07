@@ -61,6 +61,7 @@
                     <div class="col-md-2">
                         <h6>Price</h6>
                     </div>
+                    
                     <div class="col-md-2">
                         <h6>Quantity</h6>
                     </div>
@@ -89,7 +90,9 @@
                             <div class="price"><fmt:formatNumber type="currency"
                                               value="${cart.product.price}"
                                               currencySymbol="VND"/></div>
+                            
                         </div>
+                            <div> ${cart.product_detail.color.name}</div>
                         <div class="col-md-2 col-6">
                             <form action="${pageContext.request.contextPath}/order/update" method="post">
                                 <div class="quantity-container d-flex align-items-center mt-15">
@@ -141,12 +144,7 @@
                                   currencySymbol="VND"/></div>
             </div>
             <div class="shipping-area d-flex justify-content-end">
-                <div class="tile text-uppercase">Shipping:</div>
-                <div class="d-inline-flex flex-column align-items-end">
-
-                    <ul class="d-flex flex-column align-items-end">
-                        <label for="local-delivery"><span>${ship}</span></label>
-                    </ul>
+                
 
                     <% if (session.getAttribute("users") != null) { %>
                     <td colspan="4">
@@ -177,9 +175,7 @@
                         </div>
                     </div>
                     <% }%>
-
-
-            </div>
+                </div>
             </div>
     </div>
 

@@ -143,24 +143,4 @@ public class OrderEntity extends Personal{
         this.creditCard = creditCard;
     }
     
-
-    
-    
-
-    
-    
-    
-    
-    
-     
-
-    
-
-    
-     
-    
-    
-    
-    
-    
 }

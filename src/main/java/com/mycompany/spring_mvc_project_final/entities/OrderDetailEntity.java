@@ -51,11 +51,6 @@ public class OrderDetailEntity {
     public void setId(int id) {
         this.id = id;
     }
-
-   
-
-    
-
     public double getPrice() {
         return price;
     }
@@ -98,19 +93,30 @@ public class OrderDetailEntity {
     
     
     @ManyToOne
-    @JoinColumn(name = "productId")
-    private ProductEntity product;
+    @JoinColumn(name = "productDetailId")
+    private ProductDetailEntity Product_Detail;
 
-    public ProductEntity getProduct() {
-        return product;
+    public ProductDetailEntity getProduct_Detail() {
+        return Product_Detail;
     }
 
-    public void setProduct(ProductEntity product) {
-        this.product = product;
+    public void setProduct_Detail(ProductDetailEntity Product_Detail) {
+        this.Product_Detail = Product_Detail;
     }
+
+   
+
     
-     public double getTotalAmount(){
-        return  getQuantity() * product.getPrice();
+    
+
+    public double getTotalPrice(){
+        double sum = 0;
+        for(int i = 1; i <= getPrice(); i++)
+        {
+            sum = sum + i;
+            //sum += i;
+}
+        return getTotalPrice();
     }
 
     public String getPaymentMethod() {

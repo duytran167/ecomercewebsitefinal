@@ -5,7 +5,9 @@
  */
 package com.mycompany.spring_mvc_project_final.controller;
 
+import com.mycompany.spring_mvc_project_final.entities.CategoryEntity;
 import com.mycompany.spring_mvc_project_final.entities.ProductEntity;
+import com.mycompany.spring_mvc_project_final.repository.CategoryRepository;
 import com.mycompany.spring_mvc_project_final.repository.ProductRepository;
 import com.mycompany.spring_mvc_project_final.service.CategoryService;
 import com.mycompany.spring_mvc_project_final.service.ColorService;
@@ -18,12 +20,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,6 +48,8 @@ public class ProductController {
     
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private CategoryRepository categoryRepository;
     
     @Autowired
     private SizeService sizeService;
@@ -74,10 +80,25 @@ public class ProductController {
                 categoryService.getCategories());
         model.addAttribute("color", productService.getListColorDetails(id));
         model.addAttribute("size", productService.getListSizeDetails(id));
-        model.addAttribute("action", "addcart");
+        
 
         return "detail";
     }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String searchCity(@RequestParam(name = "searchText") String name, Model model){
+        List<ProductEntity> product = productRepository.findProductByName(name);
+        model.addAttribute("product", product);
+        return "category";
+    }
+    @RequestMapping(value = "/sort-by-tee/{name}", method = RequestMethod.GET)
+    public String sortHotelByRateHighToLow(@PathVariable(value = "name") String name, Model model) {
+        List<ProductEntity> product = (List<ProductEntity>) productRepository.sortProductTee(name);
+        model.addAttribute("product", product);
+        
+        return "category";
+    }
+    
     
 
 }

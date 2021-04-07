@@ -65,6 +65,13 @@ public class ProductService{
         }
         return list;
     }
+
+        public List<ProductEntity> searchProduct(String name) {
+//      return (List<BookEntity>) bookRepository.findByNameContainingOrAuthorContaining(strSearch, strSearch);
+ return (List<ProductEntity>) productRepository.findProductByName(name);
+//          return (List<BookEntity>) bookRepository.findByCategoryNameContainingAndBookDetailPriceLessThan(strSearch, 1500000);
+    
+    }
     
     public List<ProductEntity> getNewProducts(Date created_date){
         return (List<ProductEntity>) productRepository.findByNewProduct(created_date);

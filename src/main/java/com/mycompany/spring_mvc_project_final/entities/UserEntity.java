@@ -52,7 +52,7 @@ public class UserEntity extends Personal implements Serializable {
     
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserStatus status;
+    private UserStatus status = UserStatus.ACTIVE;
     @Column(name = "enabled")
     private boolean enabled;
     

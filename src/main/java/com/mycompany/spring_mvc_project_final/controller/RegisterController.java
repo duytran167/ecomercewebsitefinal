@@ -71,7 +71,7 @@ public class RegisterController {
         }
         users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
 
-        users.setStatus(UserStatus.ACTIVE);
+        
         users.setEnabled(true);
         users.setRole(Role.ROLE_USER);
         userRepository.save(users);
