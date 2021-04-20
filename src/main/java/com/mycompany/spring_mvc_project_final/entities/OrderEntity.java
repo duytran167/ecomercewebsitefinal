@@ -45,8 +45,7 @@ public class OrderEntity extends Personal{
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate orderDate;
     
-    @Column(name = "totalPrice") 
-    private double totalPrice;
+    
     
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -75,13 +74,7 @@ public class OrderEntity extends Personal{
         this.orderDate = orderDate;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
+    
 
     public OrderStatus getStatus() {
         return status;

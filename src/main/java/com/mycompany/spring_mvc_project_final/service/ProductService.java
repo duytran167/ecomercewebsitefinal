@@ -48,7 +48,7 @@ public class ProductService{
     public List<ColorEntity> getListColorDetails (int id) {
         List<ColorEntity> list = new ArrayList<>();
         ProductEntity a = productRepository.findById(id);
-        for(ProductDetailEntity product : a.getProduct_detail()) {
+        for(ProductDetailEntity product : a.getProductDetail()) {
             
           list.add(product.getColor());
             
@@ -58,7 +58,7 @@ public class ProductService{
     public List<SizeEntity> getListSizeDetails (int id) {
         List<SizeEntity> list = new ArrayList<>();
          ProductEntity a = productRepository.findById(id);
-        for(ProductDetailEntity product : a.getProduct_detail()) {
+        for(ProductDetailEntity product : a.getProductDetail()) {
             
           list.add(product.getSize());
             

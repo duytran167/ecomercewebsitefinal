@@ -77,8 +77,11 @@
                                 </div>
                                 <h3 class="head">${product.name}</h3>
                                 <div class="price d-flex align-items-center"><span class="lnr lnr-tag"></span> <span class="ml-10"><fmt:formatNumber type="currency"
-                                                  value="${product.price}"
+                                                  value="${product.price}" 
                                                   currencySymbol="VND"/></span></div>
+                                <div class="search_item" style="display: none;">
+                                    <input type="text" name="price" value="${product.price}">
+                                </div>
                                 <div class="category">Category: <span>${product.category.name}</span></div>
                                 <div class="available"><span>${product.status}</span></div>
                                 <div class="sorting row product-options">
@@ -145,7 +148,7 @@
                 <div class="row mt-30">
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="single-search-product d-flex">
-                            <a href="02-11-product-details.html"><img src="img/r1.jpg" alt=""></a>
+                            <a href="02-11-product-details.html"><img src="<c:url value="/resources/img/r1.jpg"/>" alt=""></a>
                             <div class="desc">
                                 <a href="02-11-product-details.html" class="title">Pixelstore fresh Blueberry</a>
                                 <div class="price"><span class="lnr lnr-tag"></span> $240.00</div>
@@ -154,7 +157,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="single-search-product d-flex">
-                            <a href="02-11-product-details.html"><img src="img/r2.jpg" alt=""></a>
+                            <a href="02-11-product-details.html"><img src="<c:url value="/resources/img/r2.jpg"/>" alt=""></a>
                             <div class="desc">
                                 <a href="02-11-product-details.html" class="title">Pixelstore fresh Cabbage</a>
                                 <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
@@ -163,7 +166,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="single-search-product d-flex">
-                            <a href="02-11-product-details.html"><img src="img/r3.jpg" alt=""></a>
+                            <a href="02-11-product-details.html"><img src="<c:url value="/resources/img/r3.jpg"/>" alt=""></a>
                             <div class="desc">
                                 <a href="02-11-product-details.html" class="title">Pixelstore fresh Raspberry</a>
                                 <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
@@ -172,7 +175,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="single-search-product d-flex">
-                            <a href="02-11-product-details.html"><img src="img/r4.jpg" alt=""></a>
+                            <a href="02-11-product-details.html"><img src="<c:url value="/resources/img/r4.jpg"/>" alt=""></a>
                             <div class="desc">
                                 <a href="02-11-product-details.html" class="title">Pixelstore fresh Kiwi</a>
                                 <div class="price"><span class="lnr lnr-tag"></span> $189.00</div>
@@ -181,7 +184,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="single-search-product d-flex">
-                            <a href="02-11-product-details.html"><img src="img/r5.jpg" alt=""></a>
+                            <a href="02-11-product-details.html"><img src="<c:url value="/resources/img/r5.jpg"/>" alt=""></a>
                             <div class="desc">
                                 <a href="02-11-product-details.html" class="title">Pixelstore Bell Pepper</a>
                                 <div class="price"><span class="lnr lnr-tag"></span> $120.00</div>
@@ -190,7 +193,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="single-search-product d-flex">
-                            <a href="02-11-product-details.html"><img src="img/r6.jpg" alt=""></a>
+                            <a href="02-11-product-details.html"><img src="<c:url value="/resources/img/r6.jpg"/>" alt=""></a>
                             <div class="desc">
                                 <a href="02-11-product-details.html" class="title">Pixelstore fresh Blackberry</a>
                                 <div class="price"><span class="lnr lnr-tag"></span> $120.00</div>
@@ -199,7 +202,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="single-search-product d-flex">
-                            <a href="02-11-product-details.html"><img src="img/r7.jpg" alt=""></a>
+                            <a href="02-11-product-details.html"><img src="<c:url value="/resources/img/r7.jpg"/>" alt=""></a>
                             <div class="desc">
                                 <a href="02-11-product-details.html" class="title">Pixelstore fresh Brocoli</a>
                                 <div class="price"><span class="lnr lnr-tag"></span> $120.00</div>
@@ -208,7 +211,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="single-search-product d-flex">
-                            <a href="02-11-product-details.html"><img src="img/r8.jpg" alt=""></a>
+                            <a href="02-11-product-details.html"><img src="<c:url value="/resources/img/r8.jpg"/>" alt=""></a>
                             <div class="desc">
                                 <a href="02-11-product-details.html" class="title">Pixelstore fresh Carrot</a>
                                 <div class="price"><span class="lnr lnr-tag"></span> $120.00</div>
@@ -217,7 +220,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="single-search-product d-flex">
-                            <a href="02-11-product-details.html"><img src="img/r9.jpg" alt=""></a>
+                            <a href="02-11-product-details.html"><img src="<c:url value="/resources/img/r9.jpg"/>" alt=""></a>
                             <div class="desc">
                                 <a href="02-11-product-details.html" class="title">Pixelstore fresh Strawberry</a>
                                 <div class="price"><span class="lnr lnr-tag"></span> $240.00</div>
@@ -226,7 +229,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="single-search-product d-flex">
-                            <a href="02-11-product-details.html"><img src="img/r10.jpg" alt=""></a>
+                            <a href="02-11-product-details.html"><img src="<c:url value="/resources/img/r10.jpg"/>" alt=""></a>
                             <div class="desc">
                                 <a href="02-11-product-details.html" class="title">Prixma MG2 Light Inkjet</a>
                                 <div class="price"><span class="lnr lnr-tag"></span> $240.00</div>
@@ -235,7 +238,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="single-search-product d-flex">
-                            <a href="02-11-product-details.html"><img src="img/r11.jpg" alt=""></a>
+                            <a href="02-11-product-details.html"><img src="<c:url value="/resources/img/r11.jpg"/>" alt=""></a>
                             <div class="desc">
                                 <a href="02-11-product-details.html" class="title">Pixelstore fresh Cherry</a>
                                 <div class="price"><span class="lnr lnr-tag"></span> $240.00 <del>$340.00</del></div>
@@ -244,7 +247,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="single-search-product d-flex">
-                            <a href="02-11-product-details.html"><img src="img/r12.jpg" alt=""></a>
+                            <a href="02-11-product-details.html"><img src="<c:url value="/resources/img/r12.jpg"/>" alt=""></a>
                             <div class="desc">
                                 <a href="02-11-product-details.html" class="title">Pixelstore fresh Beans</a>
                                 <div class="price"><span class="lnr lnr-tag"></span> $240.00 <del>$340.00</del></div>

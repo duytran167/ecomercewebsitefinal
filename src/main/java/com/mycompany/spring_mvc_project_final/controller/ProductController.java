@@ -91,16 +91,6 @@ public class ProductController {
         model.addAttribute("product", product);
         return "category";
     }
-    @RequestMapping(value = "/sort-by-tee/{name}", method = RequestMethod.GET)
-    public String sortHotelByRateHighToLow(@PathVariable(value = "name") String name, Model model) {
-        List<ProductEntity> product = (List<ProductEntity>) productRepository.sortProductTee(name);
-        model.addAttribute("product", product);
-        
-        return "category";
-    }
-    
-    
-
 }
     
 

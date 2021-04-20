@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -43,7 +43,7 @@
             <div class="container">
                 <div class="breadcrumb-banner d-flex flex-wrap align-items-center">
                     <div class="col-first">
-                        <h1>User Profile</h1>
+                        <h1>Shopping Cart</h1>
                         <nav class="d-flex align-items-center justify-content-start">
                             <a href="index.html">Home<i class="fa fa-caret-right" aria-hidden="true"></i></a>
                             <a href="cart.html">User</a>
@@ -60,7 +60,7 @@
                         <div class="search_tabs d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
                             <div class="search_tab active d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="https://img.icons8.com/fluent/40/000000/settings.png" alt="My AQccount"/>my account</div>
                             <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="https://img.icons8.com/officel/40/000000/mastercard-credit-card.png" alt="My Credit Card"/>my credit card</div>
-                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="https://img.icons8.com/officel/40/000000/booking.png" alt="My Booking"/>my order</div>
+                            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="https://img.icons8.com/officel/40/000000/booking.png" alt="My Booking"/>my booking</div>
                         </div>		
                     </div>
         <div class="search_panel active" style=" height: 100%;border-style: outset;background-color: #d8c2d1;">
@@ -268,7 +268,10 @@
                                     </div>
                                     <div class="card-body">
                                         <ul>
-                                            
+                                            <c:forEach var="order" items="${orderList}">
+                                                <td>${order.id}</td>
+                                                
+                                                </c:forEach>
                                             <h3 style="color: tomato;">Name:<strong>${orderDetails.productDetail.product.name}</strong></h3>
                                             <li>Size: <strong>${orderDetails.productDetail.size.name}</strong></li>
                                             <li>Color: <strong>${orderDetails.productDetail.color.name}</strong></li>

@@ -10,7 +10,7 @@ package com.mycompany.spring_mvc_project_final.enums;
  * @author PC
  */
 public enum OrderStatus {
-    PENDING, CANCLED;
+    PENDING, CANCLED, Processed;
     
     
 }

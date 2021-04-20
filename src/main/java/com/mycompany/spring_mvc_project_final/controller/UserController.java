@@ -9,6 +9,7 @@ import com.mycompany.spring_mvc_project_final.entities.CreditCardEntity;
 import com.mycompany.spring_mvc_project_final.entities.OrderDetailEntity;
 import com.mycompany.spring_mvc_project_final.entities.OrderEntity;
 import com.mycompany.spring_mvc_project_final.entities.UserEntity;
+import com.mycompany.spring_mvc_project_final.enums.OrderStatus;
 import com.mycompany.spring_mvc_project_final.repository.ColorRepository;
 import com.mycompany.spring_mvc_project_final.repository.CreditCardRepository;
 import com.mycompany.spring_mvc_project_final.repository.OrderDetailRepository;
@@ -62,6 +63,8 @@ public class UserController {
     CreditCardRepository creditCardRepository;
     @Autowired
     UserRepository userRepository;
+    
+  
 
     @Autowired
     private ProductRepository productRepository;
@@ -165,14 +168,14 @@ public class UserController {
     }
 
     //cancel booking
-//    @RequestMapping(value = "/cancel-booking/{id}", method = RequestMethod.GET)
-//    public String cancelBooking(@PathVariable(value = "id") int id, HttpSession session) {
-//
-//        BookingEntity booking = bookingRepo.findById(id);
-//        booking.setStatus("Cancelled");
-//        bookingRepo.save(booking);
-//
-//        return "redirect:/";
-//    }
+    @RequestMapping(value = "/cancel-booking/{id}", method = RequestMethod.GET)
+    public String cancelBooking(@PathVariable(value = "id") int id, HttpSession session) {
+
+        OrderEntity order = orderRepository.findById(id);
+        order.setStatus(OrderStatus.CANCLED);
+        orderRepository.save(order);
+
+        return "redirect:/";
+    }
     
 }

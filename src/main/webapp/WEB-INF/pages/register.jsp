@@ -45,10 +45,10 @@
             <div class="container">
                 <div class="breadcrumb-banner d-flex flex-wrap align-items-center">
                     <div class="col-first">
-                        <h1>Shopping Cart</h1>
+                        <h1>Register</h1>
                         <nav class="d-flex align-items-center justify-content-start">
                             <a href="index.html">Home<i class="fa fa-caret-right" aria-hidden="true"></i></a>
-                            <a href="cart.html">Shopping Cart</a>
+                            <a href="cart.html">Register</a>
                         </nav>
                     </div>
                 </div>
@@ -114,6 +114,10 @@
                         
                     </div>
                 </div>
+                <div class="col-md-6">
+                                <h2> //Register</h2>
+                                <img style="border-radius: 50%; height: 400px;" src="<c:url value="/resources/img/l5.jpg"/>" class="justify-content-between">
+                            </div>
             </div>
         </div>
         <!-- End My Account -->

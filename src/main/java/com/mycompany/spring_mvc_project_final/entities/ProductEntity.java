@@ -114,15 +114,17 @@ public class ProductEntity implements Serializable {
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
-    private Set<ProductDetailEntity> product_detail;
+    private Set<ProductDetailEntity> productDetail;
 
-    public Set<ProductDetailEntity> getProduct_detail() {
-        return product_detail;
+    public Set<ProductDetailEntity> getProductDetail() {
+        return productDetail;
     }
 
-    public void setProduct_detail(Set<ProductDetailEntity> product_detail) {
-        this.product_detail = product_detail;
+    public void setProductDetail(Set<ProductDetailEntity> productDetail) {
+        this.productDetail = productDetail;
     }
+
+    
     
     
     

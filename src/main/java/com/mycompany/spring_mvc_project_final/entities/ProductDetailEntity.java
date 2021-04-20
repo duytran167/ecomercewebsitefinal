@@ -24,7 +24,7 @@ import javax.persistence.Table;
  * @author PC
  */
 @Entity
-@Table(name = "Product_Detail")
+@Table(name = "productDetail")
 public class ProductDetailEntity {
 
     @Id
@@ -78,7 +78,7 @@ public class ProductDetailEntity {
         this.quantity = quantity;
     }
 
-    @OneToMany(mappedBy = "Product_Detail", fetch = FetchType.EAGER,
+    @OneToMany(mappedBy = "productDetail", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     private Set<OrderDetailEntity> order_detail;
 

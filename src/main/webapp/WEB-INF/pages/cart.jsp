@@ -55,13 +55,19 @@
         <div class="container">
             <div class="cart-title">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <h6 class="ml-15">Product</h6>
                     </div>
                     <div class="col-md-2">
                         <h6>Price</h6>
                     </div>
-                    
+                    <div class="col-md-1">
+                        <h6>Color</h6>
+                    </div>
+                    <div class="col-md-1">
+                        <h6>Size</h6>
+                    </div>
+
                     <div class="col-md-2">
                         <h6>Quantity</h6>
                     </div>
@@ -76,28 +82,33 @@
                 <c:set var="total" value="${0}"></c:set>
                 <c:set var="totalCart" value="${0}"></c:set>
                 <c:forEach var="cart" items="${cart}">
-                    <c:set var="total" value="${cart.quantity * cart.product.price}"></c:set>
+                    <c:set var="total" value="${cart.quantity * cart.productDetail.product.price}"></c:set>
                     <c:set var="ship" value="30000"></c:set>
                     <c:set var="totalCart" value="${totalCart + total }"></c:set>
                         <div class="row align-items-center">
-                            <div class="col-md-4 col-12">
+                            <div class="col-md-2 col-6">
                                 <div class="product-item d-flex align-items-center">
-                                    <img src="img/ci3.jpg" class="img-fluid" alt="">
-                                    <h6>${cart.product.name}</h6>
+                                    
+                                    <h6>${cart.productDetail.product.name}</h6>
                             </div>
                         </div>
                         <div class="col-md-2 col-6">
                             <div class="price"><fmt:formatNumber type="currency"
-                                              value="${cart.product.price}"
+                                              value="${cart.productDetail.product.price}"
                                               currencySymbol="VND"/></div>
-                            
+
                         </div>
-                            <div> ${cart.product_detail.color.name}</div>
+                            <div class="col-md-1 col-6">
+                        <div> ${cart.productDetail.color.name}</div>
+                            </div>
+                            <div class="col-md-1 col-6">
+                        <div> ${cart.productDetail.size.name}</div>
+                            </div>
                         <div class="col-md-2 col-6">
                             <form action="${pageContext.request.contextPath}/order/update" method="post">
                                 <div class="quantity-container d-flex align-items-center mt-15">
 
-                                    <input type="hidden" name="id" value="${cart.product.id}">
+                                    <input type="hidden" name="id" value="${cart.productDetail.product.id}">
                                     <input type="text" class="quantity-amount" name="quantity" value="${cart.quantity}" id="quantity" >                               
                                     <div class="arrow-btn d-inline-flex flex-column">
                                         <button class="increase arrow" type="button" title="Increase Quantity"><span class="lnr lnr-chevron-up"></span></button>
@@ -117,7 +128,7 @@
 
                         </div>
                         <div class="col-md-2 col-12">
-                            <a href="${pageContext.request.contextPath}/order/remove/${cart.product.id}" class="genric-btn danger-border circle">Delete</a>
+                            <a href="${pageContext.request.contextPath}/order/remove/${cart.productDetail.product.id}" class="genric-btn danger-border circle">Delete</a>
                         </div>
                     </div>
                 </c:forEach>
@@ -144,46 +155,43 @@
                                   currencySymbol="VND"/></div>
             </div>
             <div class="shipping-area d-flex justify-content-end">
-                
 
-                    <% if (session.getAttribute("users") != null) { %>
-                    <td colspan="4">
 
-                        <form action="${pageContext.request.contextPath}/order/checkout" method="get">
-                        
+                <% if (session.getAttribute("users") != null) { %>
+                <td colspan="4">
+                    <form action="${pageContext.request.contextPath}/order/checkout" method="get">
                         <input class="view-btn color-2 mt-10" type="submit" value="checkout">
-                        
                     </form>
-                    </td> 
-                    <% } else { %>
-                    <td colspan="4">
-                        <div class=" view-btn color-2 mt-10" data-toggle="modal" data-target="#myModal"><a>Checkout</a></div>
-                    </td>
-                    <div class="modal" id="myModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <h3 style="text-align: center;">Please
-                                        <a href="${pageContext.request.contextPath}/login">Login</a> or 
-                                        <a href="${pageContext.request.contextPath}/register/register_log">Register</a> to get more offers!
-                                    </h3>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                </div>
+                </td> 
+                <% } else { %>
+                <td colspan="4">
+                    <div class=" view-btn color-2 mt-10" data-toggle="modal" data-target="#myModal">
+                        <a>Checkout</a></div>
+                </td>
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h3 style="text-align: center;">Please
+                                    <a href="${pageContext.request.contextPath}/login">Login</a> or 
+                                    <a href="${pageContext.request.contextPath}/register/register_log">Register</a> to get more offers!
+                                </h3>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
-                    <% }%>
                 </div>
+                <% }%>
             </div>
-    </div>
+        </div>
 
-    <!-- Start Most Search Product Area -->
+        <!-- Start Most Search Product Area -->
 
-    <jsp:include page="include/footer.jsp"/>
-    <jsp:include page="include/js-page.jsp"/>  
+        <jsp:include page="include/footer.jsp"/>
+        <jsp:include page="include/js-page.jsp"/>  
 
 
-</body>
+    </body>
 </html>

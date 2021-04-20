@@ -103,25 +103,29 @@
                                         <c:set var="total" value="${0}" ></c:set>
                                         <c:set var="totalCart" value="${0}"></c:set>
                                         <c:forEach var="cart" items="${cart}">
-                                            <c:set var="total" value="${cart.quantity * cart.product.price}"></c:set>
+                                            <c:set var="total" value="${cart.quantity * cart.productDetail.product.price}"></c:set>
                                             <c:set var="ship" value="30000"></c:set>
                                             <c:set var="totalCart" value="${totalCart + total }"></c:set>
                                             <c:set var="totalCartShip" value="${totalCart + ship}"></c:set>
                                                 <tr>
                                                     <td>Product</td>
-                                                    <td>${cart.product.name}</td>
+                                                    <td>${cart.productDetail.product.name}</td>
                                                 <td>x${cart.quantity}</td>
                                             </tr>
                                             <tr>
                                                 <td>Price</td>
                                                 <td><fmt:formatNumber type="currency"
-                                                                  value="${cart.product.price}"
+                                                                  value="${cart.productDetail.product.price}"
                                                                   currencySymbol="VND"/></td>
                                             </tr>
-                                            <!--                                        <tr>
-                                                                                        <td>Size</td>
-                                                                                        <td></td>
-                                                                                    </tr>-->
+                                            <tr>
+                                                <td>Size</td>
+                                                 <td>${cart.productDetail.size.name}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Color</td>
+                                                 <td>${cart.productDetail.color.name}</td>
+                                            </tr>
                                             <tr>
                                                 <td>Total</td>
                                                 <td><fmt:formatNumber type="currency"

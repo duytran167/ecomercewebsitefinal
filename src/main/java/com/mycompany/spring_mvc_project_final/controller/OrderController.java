@@ -100,19 +100,18 @@ public class OrderController {
 
     //Add to cart
     @RequestMapping(value = "/addToCart", method = RequestMethod.GET)
-    public String addToCarts(@RequestParam(name = "productId") int id, Model model) {
-        //@RequestParam(name = "colorId") int color,@RequestParam(name = "sizeId") int size,
-        
+    public String addToCarts(@RequestParam(name = "productId") int id,
+            @RequestParam(name = "colorId") int color,
+            @RequestParam(name = "sizeId") int size,
+            @RequestParam(name = "price") double price,Model model) {
+        SizeEntity size_pro = (SizeEntity) sizeRepository.findById(size);
+        ColorEntity color_pro = (ColorEntity) colorRepository.findById(color);
         ProductEntity product = (ProductEntity) productRepository.findById(id);
-        ProductDetailEntity product_Detail = (ProductDetailEntity) productDetailRepository.findById(id);
-        //ColorEntity color_pro = (ColorEntity) colorRepository.findById(color);
-        //SizeEntity size_pro =(SizeEntity)sizeRepository.findById(size);
-        cart.addItem(product, product_Detail);
+        cart.setPrice(price);
+        cart.addItem(product,size_pro,color_pro,cart.getPrice());
         //cart.addItem(product,color_pro,size_pro);
 
         model.addAttribute("cart", cart.getOrderDetailList());
-        //model.addAttribute("color", color_pro);
-        //model.addAttribute("size", size_pro);
 
         return "cart"; //Return Cart.jsp
     }
@@ -144,7 +143,7 @@ public class OrderController {
             @RequestParam(name = "quantity") int quantity, ProductEntity product) {
         List<OrderDetailEntity> orderDetailsList = cart.getOrderDetailsList();
         for (int i = 0; i < orderDetailsList.size(); i++) {
-            if (orderDetailsList.get(i).getProduct_Detail().getProduct().getId() == product.getId()) {
+            if (orderDetailsList.get(i).getProductDetail().getProduct().getId() == product.getId()) {
                 OrderDetailEntity orderDetail = orderDetailsList.get(i);
                 orderDetail.setQuantity(quantity);
                 orderDetailsList.set(i, orderDetail);
@@ -209,24 +208,24 @@ public class OrderController {
             for (OrderDetailEntity orderDetails : orderDetailsList) {
                 orderDetails.setOrders(newOrder);
                 //find product for order
-                int id = orderDetails.getProduct_Detail().getProduct().getId();
+                int id = orderDetails.getProductDetail().getProduct().getId();
                 ProductEntity product = productRepository.findById(id);
                 double price = product.getPrice() * orderDetails.getQuantity();
                 orderDetails.setPrice(price);
                 //
-                orderDetails.getProduct_Detail().setProduct(product);
+                orderDetails.getProductDetail().setProduct(product);
                 //them color va size
-                orderDetails.setPaymentMethod("Payment at the Shopping Web");
+                orderDetails.setPaymentMethod("Payment COD");
                 SimpleMailMessage msg = new SimpleMailMessage();
                 msg.setTo(users.getEmail());
                 msg.setSubject("Shopping Web");
                 msg.setText("Congratulations! You have successfully order."
                         + "\n Your Order Details "
-                        + "\n        Product Name: " + orderDetails.getProduct_Detail().getProduct().getName()
+                        + "\n        Product Name: " + orderDetails.getProductDetail().getProduct().getName()
                         + "\n        Quantity: " + orderDetails.getQuantity()
                         + "\n        Price: " + orderDetails.getPrice()
-                        + "\n        Size: " + orderDetails.getProduct_Detail().getSize()
-                        + "\n        Color: " + orderDetails.getProduct_Detail().getColor()
+                        + "\n        Size: " + orderDetails.getProductDetail().getSize().getName()
+                        + "\n        Color: " + orderDetails.getProductDetail().getColor().getName()
                         + "\n Thanks for choosing us!");
                 javaMailSender.send(msg);
                 orderDetailsRepository.save(orderDetails);
@@ -273,24 +272,24 @@ public class OrderController {
                 for (OrderDetailEntity orderDetails : orderDetailsList) {
                     orderDetails.setOrders(newOrder);
                     //find pro for order
-                    int id = orderDetails.getProduct_Detail().getProduct().getId();
+                    int id = orderDetails.getProductDetail().getProduct().getId();
                 ProductEntity product = productRepository.findById(id);
                 double price = product.getPrice() * orderDetails.getQuantity();
                 orderDetails.setPrice(price);
                     //
-                    orderDetails.getProduct_Detail().setProduct(product);
+                    orderDetails.getProductDetail().setProduct(product);
 
-                    orderDetails.setPaymentMethod("payment online");
+                    orderDetails.setPaymentMethod("Payment online");
                     SimpleMailMessage msg = new SimpleMailMessage();
                     msg.setTo(users.getEmail());
                     msg.setSubject("Shopping Web");
                     msg.setText("Congratulations! You have successfully order."
                             + "\n Your Order Details "
-                        + "\n        Product Name: " + orderDetails.getProduct_Detail().getProduct().getName()
+                        + "\n        Product Name: " + orderDetails.getProductDetail().getProduct().getName()
                         + "\n        Quantity: " + orderDetails.getQuantity()
                         + "\n        Price: " + orderDetails.getPrice()
-                        + "\n        Size: " + orderDetails.getProduct_Detail().getSize()
-                        + "\n        Color: " + orderDetails.getProduct_Detail().getColor()
+                        + "\n        Size: " + orderDetails.getProductDetail().getSize().getName()
+                        + "\n        Color: " + orderDetails.getProductDetail().getColor().getName()
                         + "\n Thanks for choosing us!");
                     javaMailSender.send(msg);
                     orderDetailsRepository.save(orderDetails);

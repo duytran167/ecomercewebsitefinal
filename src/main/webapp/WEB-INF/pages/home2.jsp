@@ -67,7 +67,7 @@
                                         <div class="bottom d-flex align-items-center justify-content-center">
                                             <a href="#"><span class="lnr lnr-heart"></span></a>
                                                     <a href="#"><span class="lnr lnr-layers"></span></a>
-                                                    <a href="#"><span class="lnr lnr-cart"></span></a>
+                                                   
                                                     <a href="<c:url value="/product/detail/${p.id}"/>"><span class="lnr lnr-frame-expand"></span></a>
                                         </div>
                                     </div>
@@ -92,7 +92,7 @@
             <div class="container">
                 <div class="countdown-content pb-40">
                     <div class="title text-center">
-                        <h1 class="mb-10">BEST SELL</h1>
+                        <h1 class="mb-10">BEST PRICE</h1>
                         <p>Who are in extremely love with eco friendly system.</p>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                                         <div class="bottom d-flex align-items-center justify-content-center">
                                             <a href="#"><span class="lnr lnr-heart"></span></a>
                                                     <a href="#"><span class="lnr lnr-layers"></span></a>
-                                                    <a href="#"><span class="lnr lnr-cart"></span></a>
+                                                    
                                                     <a href="<c:url value="/product/detail/${p.id}"/>"><span class="lnr lnr-frame-expand"></span></a>
                                         </div>
                                     </div>
@@ -127,6 +127,28 @@
                 </div>
             	
         </section>
+        <section class="brand-area pb-100">
+				<div class="container">
+					<div class="row logo-wrap">
+							<a class="col single-img" href="#">
+                                                            <img  class="d-block mx-auto" src="<c:url value="/resources/img/br1.png"/>" alt="">
+								
+							</a>
+							<a class="col single-img" href="#">
+								 <img  class="d-block mx-auto" src="<c:url value="/resources/img/br2.png"/>" alt="">
+							</a>
+							<a class="col single-img" href="#">
+								 <img  class="d-block mx-auto" src="<c:url value="/resources/img/br3.png"/>" alt="">
+							</a>
+							<a class="col single-img" href="#">
+								 <img  class="d-block mx-auto" src="<c:url value="/resources/img/br4.png"/>" alt="">
+							</a>
+							<a class="col single-img" href="#">
+								 <img  class="d-block mx-auto" src="<c:url value="/resources/img/br5.png"/>" alt="">
+							</a>
+					</div>	
+				</div>	
+			</section>
 
         <jsp:include page="include/footer.jsp"/>
         <jsp:include page="include/js-page.jsp"/>

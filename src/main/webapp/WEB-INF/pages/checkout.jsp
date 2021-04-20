@@ -51,33 +51,7 @@
         <!-- Start Checkout Area -->
         <div class="container">
             <div class="checkput-login">
-                <div class="top-title">
-                    <p>Returning Customer? <a data-toggle="collapse" href="#checkout-login" aria-expanded="false" aria-controls="checkout-login">Click here to login</a></p>
-                </div>
-                <div class="collapse" id="checkout-login">
-                    <div class="checkout-login-collapse d-flex flex-column">
-                        <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer, please proceed to the Billing & Shipping section.</p>
-                        <form action="#" class="d-block">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <input type="text" placeholder="Username or Email*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username or Email*'" required class="common-input mt-10">
-
-                                </div>
-                                <div class="col-lg-4">
-                                    <input type="password" placeholder="Password*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password*'" required class="common-input mt-10">
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center flex-wrap">
-                                <button class="view-btn color-2 mt-20 mr-20"><span>Login</span></button>
-                                <div class="mt-20">
-                                    <input type="checkbox" class="pixel-checkbox" id="login-1">
-                                    <label for="login-1">Remember me</label>
-                                </div>
-                            </div>
-                        </form>
-                        <a href="#" class="mt-10">Lost your password?</a>
-                    </div>
-                </div>
+                
             </div>
             <div class="checkput-login mt-20">
                 <div class="top-title">
@@ -122,7 +96,7 @@
                                 </div>
 
                                 <div class="col-lg-12">
-                                    <mvc:input class="single-input" type="text"  placeholder="Address line 01*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address line 01*'" path="address" required="true" />
+                                    <mvc:input value="${users.address}" class="single-input" type="text"  placeholder="Address line 01*" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address line 01*'" path="address" required="true" />
 
                                 </div>
                             </div>
@@ -137,7 +111,7 @@
                                 <c:set var="total" value="${0}" ></c:set>
                                 <c:set var="totalCart" value="${0}"></c:set>
                                 <c:forEach var="cart" items="${cart}" >
-                                    <c:set var="total" value="${cart.quantity * cart.product.price}"></c:set>
+                                    <c:set var="total" value="${cart.quantity * cart.productDetail.product.price}"></c:set>
                                     <c:set var="ship" value="30000"></c:set>
                                     <c:set var="totalCart" value="${totalCart + total }"></c:set>
                                     <c:set var="totalCartShip" value="${totalCart + ship}"></c:set>
@@ -148,8 +122,9 @@
 
 
                                         <div class="list-row d-flex justify-content-between">
-                                            <div>${cart.product.name}</div>
-                                        <div>${cart.quantity}</div>
+                                            <div>${cart.productDetail.product.name}</div>
+                                        <div>${cart.productDetail.size.name}</div>
+                                        <div>x${cart.quantity}</div>
                                         <div><fmt:formatNumber type="currency"
                                                           value="${total}"
                                                           currencySymbol="VND"/></div>

@@ -92,17 +92,19 @@ public class OrderDetailEntity {
 
     
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "productDetailId")
-    private ProductDetailEntity Product_Detail;
+    private ProductDetailEntity productDetail;
 
-    public ProductDetailEntity getProduct_Detail() {
-        return Product_Detail;
+    public ProductDetailEntity getProductDetail() {
+        return productDetail;
     }
 
-    public void setProduct_Detail(ProductDetailEntity Product_Detail) {
-        this.Product_Detail = Product_Detail;
+    public void setProductDetail(ProductDetailEntity productDetail) {
+        this.productDetail = productDetail;
     }
+
+    
 
    
 

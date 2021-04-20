@@ -35,6 +35,15 @@ public class CartEntity {
     ProductRepository productRepository;
     CartEntity cart;
     private UserEntity user;
+    private Double price;
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
     public CartEntity() {
         orderDetailsList = new ArrayList<>();
@@ -105,11 +114,11 @@ public class CartEntity {
     }
 
     //Add Item
-    public void addItem(ProductEntity product, ProductDetailEntity product_Detail) {
+    public void addItem(ProductEntity product,SizeEntity size_pro, ColorEntity color_pro, double price) {
         //, ColorEntity color_pro, SizeEntity size_pro
         boolean t = false;
         for (int i = 0; i < orderDetailsList.size(); i++) {
-            if (orderDetailsList.get(i).getProduct_Detail().getProduct().getId() == product.getId()) {
+            if (orderDetailsList.get(i).getProductDetail().getProduct().getId() == product.getId()) {
                 OrderDetailEntity orderDetails = orderDetailsList.get(i);
                 orderDetails.setQuantity(orderDetails.getQuantity() + 1);
                 orderDetailsList.set(i, orderDetails);
@@ -118,10 +127,15 @@ public class CartEntity {
         }
         if (!t) {
             OrderDetailEntity orderDetails = new OrderDetailEntity();
-            
-            orderDetails.getProduct_Detail().getProduct();
             orderDetails.setQuantity(1);
-            orderDetails.getPrice();
+            orderDetails.setPrice(price);
+            ProductDetailEntity productDetail = new ProductDetailEntity();
+//            productDetail.setId(1);
+            productDetail.setProduct(product);
+            productDetail.setColor(color_pro);
+            productDetail.setSize(size_pro);
+            productDetail.setQuantity(1);
+            orderDetails.setProductDetail(productDetail);
             orderDetailsList.add(orderDetails);
         }
     }
@@ -129,7 +143,7 @@ public class CartEntity {
     //Remove Item
     public void removeItem(ProductEntity product) {
         for (int i = 0; i < orderDetailsList.size(); i++) {
-            if (orderDetailsList.get(i).getProduct_Detail().getProduct().getId() == product.getId()) {
+            if (orderDetailsList.get(i).getProductDetail().getProduct().getId() == product.getId()) {
                 orderDetailsList.remove(i);
             }
         }
@@ -138,7 +152,7 @@ public class CartEntity {
     public double getTotal() {
         double sum = 0;
         for (int i = 0; i < orderDetailsList.size(); i++) {
-                double price = orderDetailsList.get(i).getProduct_Detail().getProduct().getPrice();
+                double price = orderDetailsList.get(i).getProductDetail().getProduct().getPrice();
                 int quantity = orderDetailsList.get(i).getQuantity();
                 sum = (price * quantity);
         }
